@@ -1,7 +1,7 @@
 // Service worker: keeps a copy of the app on the phone so it opens without signal.
 // vite.config.ts fills in the cache name and file list below at build time.
-const CACHE_NAME = "gym-guide-595e1e30389c";
-const PRECACHE = ["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png","./assets/index-23eBD2Tr.js","./assets/index-BYPyJDQf.css"];
+const CACHE_NAME = "gym-guide-c51173505cdd";
+const PRECACHE = ["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png","./assets/index-Cr_dYweg.js","./assets/index-US-vJGS6.css"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
