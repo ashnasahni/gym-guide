@@ -4,10 +4,13 @@ const CACHE_NAME = "gym-guide-b44b9661d63e";
 const PRECACHE = ["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png","./assets/index-B54JH_Hx.js","./assets/index-XT60FNxc.css"];
 
 self.addEventListener("install", (event) => {
+  // "reload" skips the browser's own cache, which on GitHub Pages can hold a page for up to 10 minutes.
+  // Without it, a stale index.html could be saved next to files from the new version.
+  const requests = PRECACHE.map((url) => new Request(url, { cache: "reload" }));
   event.waitUntil(
     caches
       .open(CACHE_NAME)
-      .then((cache) => cache.addAll(PRECACHE))
+      .then((cache) => cache.addAll(requests))
       .then(() => self.skipWaiting()),
   );
 });
@@ -26,8 +29,11 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET" || new URL(request.url).origin !== self.location.origin) return;
 
   if (request.mode === "navigate") {
-    // Pages: use the network when it's there so updates show up, otherwise the saved copy.
-    event.respondWith(fetch(request).catch(() => caches.match("./index.html", { ignoreSearch: true })));
+    // Pages: ask the network, checking that the browser's cached page is still current, so a new
+    // version shows up right away. With no signal, fall back to the saved copy.
+    event.respondWith(
+      fetch(request.url, { cache: "no-cache" }).catch(() => caches.match("./index.html", { ignoreSearch: true })),
+    );
     return;
   }
   // Built files have unique names per version, so the saved copy is always right.
