@@ -1,7 +1,7 @@
 // Service worker: keeps a copy of the app on the phone so it opens without signal.
 // vite.config.ts fills in the cache name and file list below at build time.
-const CACHE_NAME = "gym-guide-ed8b4944c494";
-const PRECACHE = ["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png","./assets/index-C075hL3j.js","./assets/index-DwcW_KVQ.css"];
+const CACHE_NAME = "gym-guide-a42898a5a1ad";
+const PRECACHE = ["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png","./assets/index-uDb94x4R.js","./assets/index-DwcW_KVQ.css"];
 
 self.addEventListener("install", (event) => {
   // "reload" skips the browser's own cache, which on GitHub Pages can hold a page for up to 10 minutes.
