@@ -1,7 +1,7 @@
 // Service worker: keeps a copy of the app on the phone so it opens without signal.
 // vite.config.ts fills in the cache name and file list below at build time.
-const CACHE_NAME = "gym-guide-e1bdc18aaba1";
-const PRECACHE = ["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png","./assets/index-3tjRsXYd.js","./assets/index-CavEPfWh.css"];
+const CACHE_NAME = "gym-guide-2b2ae5292682";
+const PRECACHE = ["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png","./assets/index-DTfcS4HZ.js","./assets/index-DYXU2jAa.css"];
 // Songs the user chose to save for offline use. They live in their own cache so an app update keeps them.
 // Keep this name in step with src/offlineMusic.ts.
 const MUSIC_CACHE = "gym-guide-music";
@@ -22,7 +22,11 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches
       .keys()
-      .then((names) => Promise.all(names.filter((name) => name !== CACHE_NAME && name !== MUSIC_CACHE).map((name) => caches.delete(name))))
+      .then((names) =>
+        Promise.all(
+          names.filter((name) => name !== CACHE_NAME && name !== MUSIC_CACHE).map((name) => caches.delete(name)),
+        ),
+      )
       .then(() => self.clients.claim()),
   );
 });
