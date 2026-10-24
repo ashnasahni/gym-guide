@@ -275,11 +275,13 @@
             <span>Last: ${X(c,yr(n),r)}</span>
           </p>
           ${d}
-        </section>`}).join(``)}function Tr(e,t){return Zn(e).slice(0,_r).map(e=>{let n=e.entries.filter(({exerciseId:e})=>o[e]).map(({exerciseId:e,session:n})=>{let r=o[e];return`<li>${r.name}: <span class="hint">${X(n,yr(r),t)}</span></li>`}).join(``);return`
-        <section class="card">
-          <h3 class="progress-name">${Z(e.date)}</h3>
-          <ul class="summary">${n}</ul>
-        </section>`}).join(``)}function Er(e){let[t,n,r]=e.split(`-`).map(Number);return new Date(t,n-1,r,12).toISOString()}function Dr(e){if(e.length===0)return``;let t=e.slice(-14),n=t[t.length-1],r=[{name:`How rested you felt`,points:t.map(e=>({date:e.date,value:e.feel})),format:e=>`${nr[e]??e} (${e}/5)`},{name:`Hours slept`,points:t.flatMap(e=>e.hours===null?[]:[{date:e.date,value:e.hours}]),format:e=>`${e} h`},{name:`Readiness`,points:t.flatMap(e=>e.readiness===null?[]:[{date:e.date,value:e.readiness}]),format:e=>String(e)}].filter(e=>e.points.length>=2).map(e=>`
+        </section>`}).join(``)}function Tr(e,t){let n=Zn(e).slice(0,_r);if(n.length===0)return``;let r=n.map(e=>{let n=e.entries.filter(({exerciseId:e})=>o[e]).map(({exerciseId:e,session:n})=>{let r=o[e];return`<li>${r.name}: <span class="hint">${X(n,yr(r),t)}</span></li>`}).join(``);return`
+        <h3 class="progress-name">${Z(e.date)}</h3>
+        <ul class="summary">${n}</ul>`});return`
+    <details class="card switcher recent-workouts">
+      <summary>Recent workouts (${n.length})</summary>
+      ${r.join(``)}
+    </details>`}function Er(e){let[t,n,r]=e.split(`-`).map(Number);return new Date(t,n-1,r,12).toISOString()}function Dr(e){if(e.length===0)return``;let t=e.slice(-14),n=t[t.length-1],r=[{name:`How rested you felt`,points:t.map(e=>({date:e.date,value:e.feel})),format:e=>`${nr[e]??e} (${e}/5)`},{name:`Hours slept`,points:t.flatMap(e=>e.hours===null?[]:[{date:e.date,value:e.hours}]),format:e=>`${e} h`},{name:`Readiness`,points:t.flatMap(e=>e.readiness===null?[]:[{date:e.date,value:e.readiness}]),format:e=>String(e)}].filter(e=>e.points.length>=2).map(e=>`
         <section class="card progress-card">
           <h3 class="progress-name">${e.name}</h3>
           ${Cr(e.name,e.points.map(e=>Er(e.date)),e.points.map(e=>e.value),e.format)}
@@ -303,7 +305,7 @@
       <p class="week-count"><strong>${o}</strong> of ${n}</p>
       <p>workouts this week${o>=n?` — goal reached!`:``}</p>
       <p class="week-sets">${s} ${s===1?`set`:`sets`} logged</p>
-      <p class="hint">That's the number of workout days in your week plan (change it in Profile). The week starts Monday.</p>
+      <p class="hint small">Your goal is the workout days in your week plan. The week starts Monday.</p>
     </section>
 
     ${Sr(e,t,i)}
@@ -313,7 +315,6 @@
     <h2 class="section-title">Exercises</h2>
     ${wr(e,t,i)}
 
-    <h2 class="section-title">Recent workouts</h2>
     ${Tr(e,i)}
   `}var kr={open:!1,feel:null,hours:``,readiness:``,error:``};function Ar(e){return`
     <section class="card recovery-card">
