@@ -76,7 +76,7 @@
         </button>`}).join(``),i=mn(e,n);return`
     <div class="week-nav">
       <button type="button" class="week-step" data-action="week-prev" aria-label="Previous week"${n<=-4?` disabled`:``}>‹</button>
-      ${n===0?`<span class="week-title">${i}</span>`:`<button type="button" class="link-button week-title" data-action="week-today">${i} · back to this week</button>`}
+      ${n===0?`<span class="week-title">${i}</span>`:`<button type="button" class="link-button week-title" data-action="week-today" aria-label="${i}. Tap to go back to this week">${i}</button>`}
       <button type="button" class="week-step" data-action="week-next" aria-label="Next week"${n>=12?` disabled`:``}>›</button>
     </div>
     <div class="calendar" role="group" aria-label="${i}">${r}</div>
