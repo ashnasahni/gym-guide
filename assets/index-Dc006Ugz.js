@@ -120,7 +120,7 @@
         <button type="button" class="primary" data-action="easy-week-start">Make this week easier</button>
       </div>
       <p class="hint small">A training suggestion, not medical advice.</p>
-    </section>`}function Sn(e){return`data-${e.replace(/[A-Z]/g,e=>`-${e.toLowerCase()}`)}`}function Cn(e){return`"${e.replace(/["\\]/g,`\\$&`)}"`}function wn(e,t){if(!(e instanceof HTMLElement)||e===t||!t.contains(e))return null;let n=Object.entries(e.dataset).map(([e,t])=>`[${Sn(e)}=${Cn(t??``)}]`);return n.length===0?null:`${e.tagName.toLowerCase()}${n.join(``)}`}function Tn(e,t){e.querySelector(t)?.focus({preventScroll:!0})}function En(e){let t=e.querySelector(`main h1`);t&&(t.tabIndex=-1,t.focus({preventScroll:!0}))}var Dn={name:``,grams:``,goal:``,error:``,calorieName:``,calories:``,calorieGoal:``,calorieError:``,proteinQuickOpen:!1,calorieQuickOpen:!1};function On(e,t){return`<div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${t}" aria-valuenow="${e}">
+    </section>`}function Sn(e){return`data-${e.replace(/[A-Z]/g,e=>`-${e.toLowerCase()}`)}`}function Cn(e){return`"${e.replace(/["\\]/g,`\\$&`)}"`}function wn(e,t){if(!(e instanceof HTMLElement)||e===t||!t.contains(e))return null;let n=Object.entries(e.dataset).map(([e,t])=>`[${Sn(e)}=${Cn(t??``)}]`);return n.length===0?null:`${e.tagName.toLowerCase()}${n.join(``)}`}function Tn(e,t){e.querySelector(t)?.focus({preventScroll:!0})}function En(e){let t=e.querySelector(`main h1`);t&&(t.tabIndex=-1,t.focus({preventScroll:!0}))}var Dn={name:``,grams:``,goal:``,error:``,calorieName:``,calories:``,calorieGoal:``,calorieError:``,proteinQuickOpen:!1,calorieQuickOpen:!1,proteinGoalOpen:!1,calorieGoalOpen:!1};function On(e,t){return`<div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${t}" aria-valuenow="${e}">
     <div class="meter-fill" style="width: ${Math.min(100,Math.round(e/t*100))}%"></div>
   </div>`}function kn(e,t){let n=e.waterGoal;return`
     <section class="card fuel-water">
@@ -138,14 +138,14 @@
         <button type="button" class="step-button small" data-action="water-goal" data-delta="1" aria-label="Raise water goal">+</button>
       </div>
     </section>
-  `}function An(e){return`
-    <p class="hint">Optional: set a daily goal to see how close you are. A common target for building muscle is about 0.7 g per pound of body weight. A doctor or dietitian can tell you what's right for you.</p>
+  `}function An(e){return e.proteinGoalOpen?`
+    <p class="hint">A common target for building muscle is about 0.7 g per pound of body weight. A doctor or dietitian can tell you what's right for you.</p>
     <div class="inline-form">
       <input type="number" inputmode="numeric" min="1" placeholder="e.g. 100" value="${R(e.goal)}" data-field="protein-goal" aria-label="Daily protein goal in grams" />
       <span>g</span>
       <button type="button" class="secondary" data-action="set-protein-goal">Set goal</button>
     </div>
-  `}function jn(e,t,n){let r=V(e,t),i=ct(r),a=e.proteinGoal,o=a===null?`<p class="fuel-total"><strong>${i}</strong> g today</p>`:`<p class="fuel-total"><strong>${i}</strong> of ${a} g${i>=a?` — goal reached!`:``}</p>${On(i,a)}`,s=r.protein.length===0?`<p class="hint">Nothing logged yet today. Tap Quick add to pick a food.</p>`:`<ul class="entry-list">${r.protein.map((e,t)=>`
+  `:`<button type="button" class="link-button" data-action="show-protein-goal">Set a daily goal (optional)</button>`}function jn(e,t,n){let r=V(e,t),i=ct(r),a=e.proteinGoal,o=a===null?`<p class="fuel-total"><strong>${i}</strong> g today</p>`:`<p class="fuel-total"><strong>${i}</strong> of ${a} g${i>=a?` — goal reached!`:``}</p>${On(i,a)}`,s=r.protein.length===0?`<p class="hint">Nothing logged yet today. Tap Add food.</p>`:`<ul class="entry-list">${r.protein.map((e,t)=>`
           <li>
             <span>${R(e.name)}</span>
             <span class="entry-grams">${e.grams} g</span>
@@ -159,30 +159,30 @@
       ${o}
       ${s}
 
-      <details class="quick-add" data-quick="protein"${n.proteinQuickOpen?` open`:``}>
-        <summary>Quick add</summary>
+      <details class="quick-add" data-quick="protein"${n.proteinQuickOpen||n.error&&!n.proteinGoalOpen?` open`:``}>
+        <summary>Add food</summary>
         <div class="quick-grid">${c}</div>
         <p class="hint small">Amounts are rough averages for a typical serving.</p>
+        <h3>Something else</h3>
+        <div class="inline-form">
+          <input type="text" placeholder="What you ate" value="${R(n.name)}" data-field="protein-name" aria-label="Food name" maxlength="60" />
+          <input type="number" inputmode="numeric" min="1" placeholder="g" value="${R(n.grams)}" data-field="protein-grams" aria-label="Protein in grams" class="grams-input" />
+          <button type="button" class="secondary" data-action="add-protein">Add</button>
+        </div>
+        ${n.error&&!n.proteinGoalOpen?`<p class="form-error" role="alert">${n.error}</p>`:``}
       </details>
-
-      <h3>Something else</h3>
-      <div class="inline-form">
-        <input type="text" placeholder="What you ate" value="${R(n.name)}" data-field="protein-name" aria-label="Food name" maxlength="60" />
-        <input type="number" inputmode="numeric" min="1" placeholder="g" value="${R(n.grams)}" data-field="protein-grams" aria-label="Protein in grams" class="grams-input" />
-        <button type="button" class="secondary" data-action="add-protein">Add</button>
-      </div>
-      ${n.error?`<p class="form-error" role="alert">${n.error}</p>`:``}
+      ${n.error&&n.proteinGoalOpen?`<p class="form-error" role="alert">${n.error}</p>`:``}
 
       ${a===null?An(n):`<button type="button" class="link-button" data-action="clear-protein-goal">Change protein goal (${a} g)</button>`}
     </section>
-  `}function Mn(e){return`
-    <p class="hint">Optional: set a daily goal to see how close you are. A doctor or dietitian can tell you what's right for you.</p>
+  `}function Mn(e){return e.calorieGoalOpen?`
+    <p class="hint">A doctor or dietitian can tell you what's right for you.</p>
     <div class="inline-form">
       <input type="number" inputmode="numeric" min="1" placeholder="e.g. 2400" value="${R(e.calorieGoal)}" data-field="calorie-goal" aria-label="Daily calorie goal" />
       <span>cal</span>
       <button type="button" class="secondary" data-action="set-calorie-goal">Set goal</button>
     </div>
-  `}function Nn(e,t,n){let r=V(e,t),i=at(r),a=e.calorieGoal,o=a===null?`<p class="fuel-total"><strong>${i}</strong> cal today</p>`:`<p class="fuel-total"><strong>${i}</strong> of ${a} cal${i>=a?` — goal reached!`:``}</p>${On(i,a)}`,s=r.calories.length===0?`<p class="hint">Nothing logged yet today. Tap Quick add to pick a food.</p>`:`<ul class="entry-list">${r.calories.map((e,t)=>`
+  `:`<button type="button" class="link-button" data-action="show-calorie-goal">Set a daily goal (optional)</button>`}function Nn(e,t,n){let r=V(e,t),i=at(r),a=e.calorieGoal,o=a===null?`<p class="fuel-total"><strong>${i}</strong> cal today</p>`:`<p class="fuel-total"><strong>${i}</strong> of ${a} cal${i>=a?` — goal reached!`:``}</p>${On(i,a)}`,s=r.calories.length===0?`<p class="hint">Nothing logged yet today. Tap Add food.</p>`:`<ul class="entry-list">${r.calories.map((e,t)=>`
           <li>
             <span>${R(e.name)}</span>
             <span class="entry-grams">${e.kcal} cal</span>
@@ -196,19 +196,19 @@
       ${o}
       ${s}
 
-      <details class="quick-add" data-quick="calories"${n.calorieQuickOpen?` open`:``}>
-        <summary>Quick add</summary>
+      <details class="quick-add" data-quick="calories"${n.calorieQuickOpen||n.calorieError&&!n.calorieGoalOpen?` open`:``}>
+        <summary>Add food</summary>
         <div class="quick-grid">${c}</div>
         <p class="hint small">Amounts are rough averages for a typical serving. Use the box below if you know the real number.</p>
+        <h3>Something else</h3>
+        <div class="inline-form">
+          <input type="text" placeholder="What you ate" value="${R(n.calorieName)}" data-field="calorie-name" aria-label="Food name for calories" maxlength="60" />
+          <input type="number" inputmode="numeric" min="1" placeholder="cal" value="${R(n.calories)}" data-field="calorie-amount" aria-label="Calories" class="grams-input" />
+          <button type="button" class="secondary" data-action="add-calories">Add</button>
+        </div>
+        ${n.calorieError&&!n.calorieGoalOpen?`<p class="form-error" role="alert">${n.calorieError}</p>`:``}
       </details>
-
-      <h3>Something else</h3>
-      <div class="inline-form">
-        <input type="text" placeholder="What you ate" value="${R(n.calorieName)}" data-field="calorie-name" aria-label="Food name for calories" maxlength="60" />
-        <input type="number" inputmode="numeric" min="1" placeholder="cal" value="${R(n.calories)}" data-field="calorie-amount" aria-label="Calories" class="grams-input" />
-        <button type="button" class="secondary" data-action="add-calories">Add</button>
-      </div>
-      ${n.calorieError?`<p class="form-error" role="alert">${n.calorieError}</p>`:``}
+      ${n.calorieError&&n.calorieGoalOpen?`<p class="form-error" role="alert">${n.calorieError}</p>`:``}
 
       ${a===null?Mn(n):`<button type="button" class="link-button" data-action="clear-calorie-goal">Change calorie goal (${a} cal)</button>`}
     </section>
@@ -220,7 +220,7 @@
     ${kn(e,V(e,t).glasses)}
     ${jn(e,t,n)}
     ${Nn(e,t,n)}
-  `}function Fn(t){let{root:n,state:r}=t,i={...Dn};function a(e){return n.querySelector(`input[data-field="${e}"]`)?.value??``}function o(){i={name:a(`protein-name`),grams:a(`protein-grams`),goal:a(`protein-goal`),error:``,calorieName:a(`calorie-name`),calories:a(`calorie-amount`),calorieGoal:a(`calorie-goal`),calorieError:``,proteinQuickOpen:n.querySelector(`details[data-quick="protein"]`)?.open??i.proteinQuickOpen,calorieQuickOpen:n.querySelector(`details[data-quick="calories"]`)?.open??i.calorieQuickOpen}}function s(n,a,s){o();let c=e(new Date),l=r.nutrition;if(n===`water`)r.nutrition=et(l,c,Number(a));else if(n===`water-goal`)r.nutrition={...l,waterGoal:Math.min(20,Math.max(1,l.waterGoal+Number(a)))};else if(n===`quick-protein`){let e=Ze[Number(s)];e&&(r.nutrition=tt(l,c,e))}else if(n===`add-protein`){let e=lt(i.name,i.grams);e?i.error=e:(r.nutrition=tt(l,c,{name:i.name.trim(),grams:Number(i.grams)}),i={...i,name:``,grams:``})}else if(n===`remove-protein`)r.nutrition=nt(l,c,Number(s));else if(n===`set-protein-goal`){let e=Number(i.goal);!Number.isInteger(e)||e<1||e>400?i.error=`Enter a protein goal in whole grams, between 1 and 400.`:r.nutrition={...l,proteinGoal:e}}else if(n===`clear-protein-goal`)i.goal=String(l.proteinGoal??``),r.nutrition={...l,proteinGoal:null};else if(n===`quick-calories`){let e=Qe[Number(s)];e&&(r.nutrition=rt(l,c,e))}else if(n===`add-calories`){let e=ot(i.calorieName,i.calories);e?i.calorieError=e:(r.nutrition=rt(l,c,{name:i.calorieName.trim(),kcal:Number(i.calories)}),i={...i,calorieName:``,calories:``})}else if(n===`remove-calories`)r.nutrition=it(l,c,Number(s));else if(n===`set-calorie-goal`){let e=st(i.calorieGoal);e?i.calorieError=e:r.nutrition={...l,calorieGoal:Number(i.calorieGoal)}}else n===`clear-calorie-goal`&&(i.calorieGoal=String(l.calorieGoal??``),r.nutrition={...l,calorieGoal:null});J(r)||(i.error=`Couldn't save on this device.`),t.render()}return{screen:()=>Pn(r.nutrition,e(new Date),i),handleAction:s}}var In=e=>`<svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${e}</svg>`,Ln={today:In(`<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11" />`),progress:In(`<path d="M4 4v16h16M8 15l4-5 3 3 5-7" />`),fuel:In(`<path d="M12 3c3 4.2 6 7.2 6 11a6 6 0 0 1-12 0c0-3.8 3-6.8 6-11z" />`),profile:In(`<circle cx="12" cy="8" r="4" /><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" />`)},Y=[{title:`Your week`,text:`Tap a day to see its workout. Swipe sideways to look at other weeks.`,target:`.calendar`},{title:`Start workout`,text:`At the gym, tap this. It talks you through every set and times your rest.`,target:`[data-action="start-workout"]`},{title:`Progress`,text:`Your weights and charts show up here after you log sets.`,target:`[data-nav="progress"]`},{title:`Fuel`,text:`Log water, protein and calories with a tap.`,target:`[data-nav="fuel"]`},{title:`Profile`,text:`Change your goal, workout days and equipment, and back up your data here.`,target:`[data-nav="profile"]`}];function Rn(e){let t=Y[e];if(!t)return``;let n=e===Y.length-1;return`
+  `}function Fn(t){let{root:n,state:r}=t,i={...Dn};function a(e){return n.querySelector(`input[data-field="${e}"]`)?.value??``}function o(){i={name:a(`protein-name`),grams:a(`protein-grams`),goal:a(`protein-goal`),error:``,calorieName:a(`calorie-name`),calories:a(`calorie-amount`),calorieGoal:a(`calorie-goal`),calorieError:``,proteinQuickOpen:n.querySelector(`details[data-quick="protein"]`)?.open??i.proteinQuickOpen,calorieQuickOpen:n.querySelector(`details[data-quick="calories"]`)?.open??i.calorieQuickOpen,proteinGoalOpen:i.proteinGoalOpen,calorieGoalOpen:i.calorieGoalOpen}}function s(n,a,s){o();let c=e(new Date),l=r.nutrition;if(n===`water`)r.nutrition=et(l,c,Number(a));else if(n===`water-goal`)r.nutrition={...l,waterGoal:Math.min(20,Math.max(1,l.waterGoal+Number(a)))};else if(n===`quick-protein`){let e=Ze[Number(s)];e&&(r.nutrition=tt(l,c,e))}else if(n===`add-protein`){let e=lt(i.name,i.grams);e?i.error=e:(r.nutrition=tt(l,c,{name:i.name.trim(),grams:Number(i.grams)}),i={...i,name:``,grams:``})}else if(n===`remove-protein`)r.nutrition=nt(l,c,Number(s));else if(n===`show-protein-goal`)i.proteinGoalOpen=!0;else if(n===`show-calorie-goal`)i.calorieGoalOpen=!0;else if(n===`set-protein-goal`){let e=Number(i.goal);!Number.isInteger(e)||e<1||e>400?i.error=`Enter a protein goal in whole grams, between 1 and 400.`:(r.nutrition={...l,proteinGoal:e},i.proteinGoalOpen=!1)}else if(n===`clear-protein-goal`)i.goal=String(l.proteinGoal??``),i.proteinGoalOpen=!0,r.nutrition={...l,proteinGoal:null};else if(n===`quick-calories`){let e=Qe[Number(s)];e&&(r.nutrition=rt(l,c,e))}else if(n===`add-calories`){let e=ot(i.calorieName,i.calories);e?i.calorieError=e:(r.nutrition=rt(l,c,{name:i.calorieName.trim(),kcal:Number(i.calories)}),i={...i,calorieName:``,calories:``})}else if(n===`remove-calories`)r.nutrition=it(l,c,Number(s));else if(n===`set-calorie-goal`){let e=st(i.calorieGoal);e?i.calorieError=e:(r.nutrition={...l,calorieGoal:Number(i.calorieGoal)},i.calorieGoalOpen=!1)}else n===`clear-calorie-goal`&&(i.calorieGoal=String(l.calorieGoal??``),i.calorieGoalOpen=!0,r.nutrition={...l,calorieGoal:null});J(r)||(i.error=`Couldn't save on this device.`),t.render()}return{screen:()=>Pn(r.nutrition,e(new Date),i),handleAction:s}}var In=e=>`<svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${e}</svg>`,Ln={today:In(`<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11" />`),progress:In(`<path d="M4 4v16h16M8 15l4-5 3 3 5-7" />`),fuel:In(`<path d="M12 3c3 4.2 6 7.2 6 11a6 6 0 0 1-12 0c0-3.8 3-6.8 6-11z" />`),profile:In(`<circle cx="12" cy="8" r="4" /><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" />`)},Y=[{title:`Your week`,text:`Tap a day to see its workout. Swipe sideways to look at other weeks.`,target:`.calendar`},{title:`Start workout`,text:`At the gym, tap this. It talks you through every set and times your rest.`,target:`[data-action="start-workout"]`},{title:`Progress`,text:`Your weights and charts show up here after you log sets.`,target:`[data-nav="progress"]`},{title:`Fuel`,text:`Log water, protein and calories with a tap.`,target:`[data-nav="fuel"]`},{title:`Profile`,text:`Change your goal, workout days and equipment, and back up your data here.`,target:`[data-nav="profile"]`}];function Rn(e){let t=Y[e];if(!t)return``;let n=e===Y.length-1;return`
     <aside class="tour" role="region" aria-label="App tour, step ${e+1} of ${Y.length}">
       <p class="tour-count">${e+1} of ${Y.length}</p>
       <h2>${t.title}</h2>
