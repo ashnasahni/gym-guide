@@ -93,14 +93,15 @@
       <p>Rest day. Your muscles grow while you recover, so a walk or some stretching is plenty.</p>
     </section>
 
+    ${e.isToday?`<section class="card train-anyway">
+             <h2>Want to train anyway?</h2>
+             <p class="picker-hint">Pick a gym workout for today. Your week plan stays as it is.</p>
+             ${be(null,`Pick a gym workout for today`,h)}
+           </section>`:``}
+
     ${An(`At-home abs`,`About 10 minutes, no equipment, gentle on your back and knees. Same voice and timer as a gym workout.`,`home`,e.isToday)}
 
-    ${An(`Mobility reset`,`About 8 minutes of slow stretches for your neck, upper back and hips. No equipment.`,`mobility`,e.isToday)}
-
-    ${e.isToday?`<section class="card">
-             <p class="picker-hint">Want a gym workout instead?</p>
-             ${be(null,`Pick a gym workout for today`,h)}
-           </section>`:``}`}function Mn(e,t){return t.flatMap((t,n)=>t&&e[n]?[`${u[n]} ${c[t].label.toLowerCase()}`]:[]).join(` · `)}function Nn(e,t,n,r){let i=l(n);if(i.length===0)return``;let a=[null,...i].map(n=>{let i=n?c[n].label:`Balanced`;return`<button type="button" class="focus-chip${n===r?` active`:``}"
+    ${An(`Mobility reset`,`About 8 minutes of slow stretches for your neck, upper back and hips. No equipment.`,`mobility`,e.isToday)}`}function Mn(e,t){return t.flatMap((t,n)=>t&&e[n]?[`${u[n]} ${c[t].label.toLowerCase()}`]:[]).join(` · `)}function Nn(e,t,n,r){let i=l(n);if(i.length===0)return``;let a=[null,...i].map(n=>{let i=n?c[n].label:`Balanced`;return`<button type="button" class="focus-chip${n===r?` active`:``}"
           data-focus-day="${t}" data-focus="${n??`balanced`}"
           aria-pressed="${n===r}" aria-label="${e} focus: ${i}">${i}</button>`}).join(``);return`<p class="plan-focus-day">${`${e} · ${n?ge[n]:``}`}</p><div class="plan-focus" role="group" aria-label="${e} focus">${a}</div>`}function Pn(e,t,n=!1){let r=[{value:`rest`,label:`Rest`,spoken:`Rest`},...m.map(e=>({value:e,label:ge[e],spoken:P[e]}))];return`<div class="plan-editor">${d.map((t,n)=>{let i=e[n]??`rest`,a=r.map(e=>`
           <button type="button" class="plan-option${e.value===i?` active`:``}"
