@@ -152,9 +152,8 @@
 
     <div class="library-list">${dr(e,t,n,r)}</div>
 
-    <button type="button" class="secondary" data-nav="today">Back to my workout</button>
-  `}function pr(){return`<button type="button" class="link-button center" data-nav="library">Look up any exercise</button>`}var mr=`https://ashnasahni.github.io/gym-guide/`,hr=3;function gr(e,t){return`${e} ${t}${e===1?``:`s`}`}function _r(e,t,r,i){let a=[`My week on Gym Guide`,`${wn(e,t)} of ${gr(r,`workout`)} · ${gr(En(e,t),`set`)}`],s=Dn(e,n(t).toISOString(),Wn).filter(({exerciseId:e})=>o[e]);if(s.length>0){let e=s.slice(0,hr).map(({exerciseId:e,value:t})=>{let n=o[e];return`${n.name} ${Yn(n,Jn(n,t,i),i)}`}),t=s.length-e.length;a.push(`New bests: ${e.join(`, `)}${t>0?` and ${t} more`:``}`)}return a.push(``,`Try it: ${mr}`),a.join(`
-`)}function vr(e){let{state:t}=e;async function n(t){try{await navigator.clipboard.writeText(t),e.showToast(`Copied. Paste it into a message.`)}catch{e.showToast(`Couldn't share from this phone.`)}}async function r(){let e=(t.profile??U).weekPlan.filter(Boolean).length,r=_r(t.history,new Date,e,t.weightUnit);if(typeof navigator.share!=`function`){await n(r);return}try{await navigator.share({title:`My week on Gym Guide`,text:r})}catch(e){if(e instanceof DOMException&&e.name===`AbortError`)return;await n(r)}}return{handleAction(e){return e===`share-week`&&(r(),!0)}}}function yr(e){let{root:t,state:n}=e,r=t.querySelector(`input[data-field="cal-time"]`)?.value??``;if(!ke(r))return e.showToast(`Pick a start time first.`),null;let i=Number(t.querySelector(`select[data-field="cal-minutes"]`)?.value);n.calendar={time:r,minutes:De.includes(i)?i:n.calendar.minutes},Y(n);let a=(n.profile??U).weekPlan;return fn(`gym-guide-week.ics`,`text/calendar;charset=utf-8`,ze(a,n.calendar,new Date)),Le(a,n.calendar)}function br(e,t,n=null){let r=De.map(t=>`<option value="${t}"${t===e.minutes?` selected`:``}>${t} minutes</option>`).join(``);return`
+  `}var pr=`https://ashnasahni.github.io/gym-guide/`,mr=3;function hr(e,t){return`${e} ${t}${e===1?``:`s`}`}function gr(e,t,r,i){let a=[`My week on Gym Guide`,`${wn(e,t)} of ${hr(r,`workout`)} · ${hr(En(e,t),`set`)}`],s=Dn(e,n(t).toISOString(),Wn).filter(({exerciseId:e})=>o[e]);if(s.length>0){let e=s.slice(0,mr).map(({exerciseId:e,value:t})=>{let n=o[e];return`${n.name} ${Yn(n,Jn(n,t,i),i)}`}),t=s.length-e.length;a.push(`New bests: ${e.join(`, `)}${t>0?` and ${t} more`:``}`)}return a.push(``,`Try it: ${pr}`),a.join(`
+`)}function _r(e){let{state:t}=e;async function n(t){try{await navigator.clipboard.writeText(t),e.showToast(`Copied. Paste it into a message.`)}catch{e.showToast(`Couldn't share from this phone.`)}}async function r(){let e=(t.profile??U).weekPlan.filter(Boolean).length,r=gr(t.history,new Date,e,t.weightUnit);if(typeof navigator.share!=`function`){await n(r);return}try{await navigator.share({title:`My week on Gym Guide`,text:r})}catch(e){if(e instanceof DOMException&&e.name===`AbortError`)return;await n(r)}}return{handleAction(e){return e===`share-week`&&(r(),!0)}}}function vr(e){let{root:t,state:n}=e,r=t.querySelector(`input[data-field="cal-time"]`)?.value??``;if(!ke(r))return e.showToast(`Pick a start time first.`),null;let i=Number(t.querySelector(`select[data-field="cal-minutes"]`)?.value);n.calendar={time:r,minutes:De.includes(i)?i:n.calendar.minutes},Y(n);let a=(n.profile??U).weekPlan;return fn(`gym-guide-week.ics`,`text/calendar;charset=utf-8`,ze(a,n.calendar,new Date)),Le(a,n.calendar)}function yr(e,t,n=null){let r=De.map(t=>`<option value="${t}"${t===e.minutes?` selected`:``}>${t} minutes</option>`).join(``);return`
     <section class="card">
       <h2>Add to your calendar</h2>
       <p class="hint">Adds your workout days as weekly repeating events. Tap the button, then open the file it downloads and your calendar app will offer to add them.</p>
@@ -169,34 +168,34 @@
         </label>
       </div>
       ${t?`<p class="notice">You changed your week. Tap Save profile below first, then add it to your calendar.</p>`:``}
-      ${n&&!t?xr(n):``}
+      ${n&&!t?br(n):``}
       <button type="button" class="secondary" data-action="add-to-calendar"${t?` disabled`:``}>Add to calendar</button>
       <p class="hint small">This is a one-time copy. If you change your week later, delete the old events in your calendar and add it again. The events repeat every week until you delete them.</p>
     </section>
-  `}function xr(e){return`
+  `}function br(e){return`
     <div class="notice" role="status">
       <p><strong>✓ File downloaded.</strong> Next, open it (from your downloads or the browser's download bar) and tap Add all in your calendar app. It holds:</p>
       <ul>${e.map(e=>`<li>${e}</li>`).join(``)}</ul>
-    </div>`}function Sr(e){return e.toLocaleDateString(void 0,{month:`long`,day:`numeric`})}function Cr(e){return e.isToday?`Today`:`${d[e.weekdayIndex]}, ${Sr(e.date)}`}function wr(e){let t=e.status===`done`&&e.workout?`${I[e.workout]} workout, done`:e.status===`planned`&&e.workout?`${I[e.workout]} planned`:e.status===`missed`&&e.workout?`${I[e.workout]} planned, not logged`:`rest day`;return`${d[e.weekdayIndex]} ${Sr(e.date)}, ${t}${e.isToday?`, today`:``}`}function Tr(e){return e.toLocaleDateString(void 0,{month:`short`,day:`numeric`})}function Er(e,t){return t===0?`This week`:t===1?`Next week`:t===-1?`Last week`:`${Tr(e[0].date)} – ${Tr(e[6].date)}`}function Dr(e,t,n=0){let r=e.map(e=>{let n=e.workout?L[e.workout]:`Rest`,r=e.status===`done`?`✓`:e.status===`missed`?`○`:``;return`
+    </div>`}function xr(e){return e.toLocaleDateString(void 0,{month:`long`,day:`numeric`})}function Sr(e){return e.isToday?`Today`:`${d[e.weekdayIndex]}, ${xr(e.date)}`}function Cr(e){let t=e.status===`done`&&e.workout?`${I[e.workout]} workout, done`:e.status===`planned`&&e.workout?`${I[e.workout]} planned`:e.status===`missed`&&e.workout?`${I[e.workout]} planned, not logged`:`rest day`;return`${d[e.weekdayIndex]} ${xr(e.date)}, ${t}${e.isToday?`, today`:``}`}function wr(e){return e.toLocaleDateString(void 0,{month:`short`,day:`numeric`})}function Tr(e,t){return t===0?`This week`:t===1?`Next week`:t===-1?`Last week`:`${wr(e[0].date)} – ${wr(e[6].date)}`}function Er(e,t,n=0){let r=e.map(e=>{let n=e.workout?L[e.workout]:`Rest`,r=e.status===`done`?`✓`:e.status===`missed`?`○`:``;return`
         <button type="button" class="${[`cal-day`,e.workout?`type-${e.workout}`:``,`cal-${e.status}`,e.isToday?`today`:``,e.key===t?`selected`:``].filter(Boolean).join(` `)}" data-date="${e.key}"
-                aria-pressed="${e.key===t}" aria-label="${wr(e)}">
+                aria-pressed="${e.key===t}" aria-label="${Cr(e)}">
           <span class="cal-weekday">${u[e.weekdayIndex]}</span>
           <span class="cal-date">${e.date.getDate()}</span>
           <span class="cal-label">${n}</span>
           <span class="cal-mark" aria-hidden="true">${r}</span>
-        </button>`}).join(``),i=Er(e,n);return`
+        </button>`}).join(``),i=Tr(e,n);return`
     <div class="week-nav">
       <button type="button" class="week-step" data-action="week-prev" aria-label="Previous week"${n<=-4?` disabled`:``}>‹</button>
       ${n===0?`<span class="week-title">${i}</span>`:`<button type="button" class="link-button week-title" data-action="week-today" aria-label="${i}. Tap to go back to this week">${i}</button>`}
       <button type="button" class="week-step" data-action="week-next" aria-label="Next week"${n>=12?` disabled`:``}>›</button>
     </div>
     <div class="calendar" role="group" aria-label="${i}">${r}</div>
-  `}function Or(e,t,n,r){return`
+  `}function Dr(e,t,n,r){return`
     <section class="card home-card">
       <h2>${e} <small>optional</small></h2>
       <p class="home-blurb">${t}</p>
       ${r?`<button type="button" class="secondary" data-day="${n}">Do ${I[n].toLowerCase()}</button>`:`<p class="hint">You can start it on the day.</p>`}
-    </section>`}function kr(e){return`
+    </section>`}function Or(e){return`
     <section class="card">
       <p>Rest day. Your muscles grow while you recover, so a walk or some stretching is plenty.</p>
     </section>
@@ -207,30 +206,30 @@
              ${ve(null,`Pick a gym workout for today`,h)}
            </section>`:``}
 
-    ${Or(`At-home abs`,`About 10 minutes, no equipment, gentle on your back and knees. Same voice and timer as a gym workout.`,`home`,e.isToday)}
+    ${Dr(`At-home abs`,`About 10 minutes, no equipment, gentle on your back and knees. Same voice and timer as a gym workout.`,`home`,e.isToday)}
 
-    ${Or(`Mobility reset`,`About 8 minutes of slow stretches for your neck, upper back and hips. No equipment.`,`mobility`,e.isToday)}`}function Ar(e,t){return t.flatMap((t,n)=>t&&e[n]?[`${u[n]} ${c[t].label.toLowerCase()}`]:[]).join(` · `)}function jr(e,t,n,r){let i=l(n);if(i.length===0)return``;let a=[null,...i].map(n=>{let i=n?c[n].label:`Balanced`;return`<button type="button" class="focus-chip${n===r?` active`:``}"
+    ${Dr(`Mobility reset`,`About 8 minutes of slow stretches for your neck, upper back and hips. No equipment.`,`mobility`,e.isToday)}`}function kr(e,t){return t.flatMap((t,n)=>t&&e[n]?[`${u[n]} ${c[t].label.toLowerCase()}`]:[]).join(` · `)}function Ar(e,t,n,r){let i=l(n);if(i.length===0)return``;let a=[null,...i].map(n=>{let i=n?c[n].label:`Balanced`;return`<button type="button" class="focus-chip${n===r?` active`:``}"
           data-focus-day="${t}" data-focus="${n??`balanced`}"
-          aria-pressed="${n===r}" aria-label="${e} focus: ${i}">${i}</button>`}).join(``);return`<p class="plan-focus-day">${`${e} · ${n?L[n]:``}`}</p><div class="plan-focus" role="group" aria-label="${e} focus">${a}</div>`}function Mr(e,t,n=!1){let r=[{value:`rest`,label:`Rest`,spoken:`Rest`},...m.map(e=>({value:e,label:L[e],spoken:I[e]}))];return`<div class="plan-editor">${d.map((t,n)=>{let i=e[n]??`rest`,a=r.map(e=>`
+          aria-pressed="${n===r}" aria-label="${e} focus: ${i}">${i}</button>`}).join(``);return`<p class="plan-focus-day">${`${e} · ${n?L[n]:``}`}</p><div class="plan-focus" role="group" aria-label="${e} focus">${a}</div>`}function jr(e,t,n=!1){let r=[{value:`rest`,label:`Rest`,spoken:`Rest`},...m.map(e=>({value:e,label:L[e],spoken:I[e]}))];return`<div class="plan-editor">${d.map((t,n)=>{let i=e[n]??`rest`,a=r.map(e=>`
           <button type="button" class="plan-option${e.value===i?` active`:``}"
                   data-plan-day="${n}" data-plan-workout="${e.value}"
                   aria-pressed="${e.value===i}" aria-label="${t}: ${e.spoken}">${e.label}</button>`).join(``);return`
       <div class="plan-row">
         <span class="plan-day"><span aria-hidden="true">${t.slice(0,3)}</span><span class="sr-only">${t}</span></span>
         <div class="plan-options">${a}</div>
-      </div>`}).join(``)}</div>${Nr(e,t,n)}`}function Nr(e,t,n){let r=d.map((n,r)=>jr(n,r,e[r],t[r]??null)).join(``);if(!r)return``;let i=Ar(e,t);return`
+      </div>`}).join(``)}</div>${Mr(e,t,n)}`}function Mr(e,t,n){let r=d.map((n,r)=>Ar(n,r,e[r],t[r]??null)).join(``);if(!r)return``;let i=kr(e,t);return`
     <details class="focus-picker"${n?` open`:``}>
       <summary><span>Focus (optional)</span>${i?`<span class="hint">${i}</span>`:``}</summary>
       <p class="hint">Lean a Push or Pull day toward one muscle.</p>
       ${r}
-    </details>`}function Pr(){return`
+    </details>`}function Nr(){return`
     <section class="card row-card easy-week-card">
       <div>
         <h2>Easy week</h2>
         <p class="hint">Fewer sets, same weights, until Sunday.</p>
       </div>
       <button type="button" class="secondary" data-action="easy-week-end">Turn off</button>
-    </section>`}function Fr(e){return`
+    </section>`}function Pr(e){return`
     <section class="card easy-week-card">
       <h2>Time for an easy week?</h2>
       <p>You've trained ${e} weeks in a row. An easier week (one fewer set, same weights) can help you recover and come back stronger. It's optional.</p>
@@ -239,13 +238,13 @@
         <button type="button" class="primary" data-action="easy-week-start">Make this week easier</button>
       </div>
       <p class="hint small">A training suggestion, not medical advice.</p>
-    </section>`}function Ir(e){return`data-${e.replace(/[A-Z]/g,e=>`-${e.toLowerCase()}`)}`}function Lr(e){return`"${e.replace(/["\\]/g,`\\$&`)}"`}function Rr(e,t){if(!(e instanceof HTMLElement)||e===t||!t.contains(e))return null;let n=Object.entries(e.dataset).map(([e,t])=>`[${Ir(e)}=${Lr(t??``)}]`);return n.length===0?null:`${e.tagName.toLowerCase()}${n.join(``)}`}function zr(e,t){e.querySelector(t)?.focus({preventScroll:!0})}function Br(e){let t=e.querySelector(`main h1`);t&&(t.tabIndex=-1,t.focus({preventScroll:!0}))}var Vr={name:``,grams:``,goal:``,error:``,calorieName:``,calories:``,calorieGoal:``,calorieError:``,proteinQuickOpen:!1,calorieQuickOpen:!1,proteinGoalOpen:!1,calorieGoalOpen:!1};function Hr(e,t){return`<div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${t}" aria-valuenow="${e}">
+    </section>`}function Fr(e){return`data-${e.replace(/[A-Z]/g,e=>`-${e.toLowerCase()}`)}`}function Ir(e){return`"${e.replace(/["\\]/g,`\\$&`)}"`}function Lr(e,t){if(!(e instanceof HTMLElement)||e===t||!t.contains(e))return null;let n=Object.entries(e.dataset).map(([e,t])=>`[${Fr(e)}=${Ir(t??``)}]`);return n.length===0?null:`${e.tagName.toLowerCase()}${n.join(``)}`}function Rr(e,t){e.querySelector(t)?.focus({preventScroll:!0})}function zr(e){let t=e.querySelector(`main h1`);t&&(t.tabIndex=-1,t.focus({preventScroll:!0}))}var Br={name:``,grams:``,goal:``,error:``,calorieName:``,calories:``,calorieGoal:``,calorieError:``,proteinQuickOpen:!1,calorieQuickOpen:!1,proteinGoalOpen:!1,calorieGoalOpen:!1};function Vr(e,t){return`<div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="${t}" aria-valuenow="${e}">
     <div class="meter-fill" style="width: ${Math.min(100,Math.round(e/t*100))}%"></div>
-  </div>`}function Ur(e,t){let n=e.waterGoal;return`
+  </div>`}function Hr(e,t){let n=e.waterGoal;return`
     <section class="card fuel-water">
       <h2>Water</h2>
       <p class="fuel-total"><strong>${t}</strong> of ${n} glasses${t>=n?` — goal reached!`:``}</p>
-      ${Hr(t,n)}
+      ${Vr(t,n)}
       <div class="button-row fuel-buttons">
         <button type="button" class="secondary" data-action="water" data-delta="-1" ${t===0?`disabled`:``} aria-label="Remove a glass">−1</button>
         <button type="button" class="primary" data-action="water" data-delta="1">+1 glass</button>
@@ -257,14 +256,14 @@
         <button type="button" class="step-button small" data-action="water-goal" data-delta="1" aria-label="Raise water goal">+</button>
       </div>
     </section>
-  `}function Wr(e){return e.proteinGoalOpen?`
+  `}function Ur(e){return e.proteinGoalOpen?`
     <p class="hint">A common target for building muscle is about 0.7 g per pound of body weight. A doctor or dietitian can tell you what's right for you.</p>
     <div class="inline-form">
       <input type="number" inputmode="numeric" min="1" placeholder="e.g. 100" value="${z(e.goal)}" data-field="protein-goal" aria-label="Daily protein goal in grams" />
       <span>g</span>
       <button type="button" class="secondary" data-action="set-protein-goal">Set goal</button>
     </div>
-  `:`<button type="button" class="link-button" data-action="show-protein-goal">Set a daily goal (optional)</button>`}function Gr(e,t,n){let r=H(e,t),i=mt(r),a=e.proteinGoal,o=a===null?`<p class="fuel-total"><strong>${i}</strong> g today</p>`:`<p class="fuel-total"><strong>${i}</strong> of ${a} g${i>=a?` — goal reached!`:``}</p>${Hr(i,a)}`,s=r.protein.length===0?`<p class="hint">Nothing logged yet today. Tap Add food.</p>`:`<ul class="entry-list">${r.protein.map((e,t)=>`
+  `:`<button type="button" class="link-button" data-action="show-protein-goal">Set a daily goal (optional)</button>`}function Wr(e,t,n){let r=H(e,t),i=mt(r),a=e.proteinGoal,o=a===null?`<p class="fuel-total"><strong>${i}</strong> g today</p>`:`<p class="fuel-total"><strong>${i}</strong> of ${a} g${i>=a?` — goal reached!`:``}</p>${Vr(i,a)}`,s=r.protein.length===0?`<p class="hint">Nothing logged yet today. Tap Add food.</p>`:`<ul class="entry-list">${r.protein.map((e,t)=>`
           <li>
             <span>${z(e.name)}</span>
             <span class="entry-grams">${e.grams} g</span>
@@ -292,16 +291,16 @@
       </details>
       ${n.error&&n.proteinGoalOpen?`<p class="form-error" role="alert">${n.error}</p>`:``}
 
-      ${a===null?Wr(n):`<button type="button" class="link-button" data-action="clear-protein-goal">Change protein goal (${a} g)</button>`}
+      ${a===null?Ur(n):`<button type="button" class="link-button" data-action="clear-protein-goal">Change protein goal (${a} g)</button>`}
     </section>
-  `}function Kr(e){return e.calorieGoalOpen?`
+  `}function Gr(e){return e.calorieGoalOpen?`
     <p class="hint">A doctor or dietitian can tell you what's right for you.</p>
     <div class="inline-form">
       <input type="number" inputmode="numeric" min="1" placeholder="e.g. 2400" value="${z(e.calorieGoal)}" data-field="calorie-goal" aria-label="Daily calorie goal" />
       <span>cal</span>
       <button type="button" class="secondary" data-action="set-calorie-goal">Set goal</button>
     </div>
-  `:`<button type="button" class="link-button" data-action="show-calorie-goal">Set a daily goal (optional)</button>`}function qr(e,t,n){let r=H(e,t),i=dt(r),a=e.calorieGoal,o=a===null?`<p class="fuel-total"><strong>${i}</strong> cal today</p>`:`<p class="fuel-total"><strong>${i}</strong> of ${a} cal${i>=a?` — goal reached!`:``}</p>${Hr(i,a)}`,s=r.calories.length===0?`<p class="hint">Nothing logged yet today. Tap Add food.</p>`:`<ul class="entry-list">${r.calories.map((e,t)=>`
+  `:`<button type="button" class="link-button" data-action="show-calorie-goal">Set a daily goal (optional)</button>`}function Kr(e,t,n){let r=H(e,t),i=dt(r),a=e.calorieGoal,o=a===null?`<p class="fuel-total"><strong>${i}</strong> cal today</p>`:`<p class="fuel-total"><strong>${i}</strong> of ${a} cal${i>=a?` — goal reached!`:``}</p>${Vr(i,a)}`,s=r.calories.length===0?`<p class="hint">Nothing logged yet today. Tap Add food.</p>`:`<ul class="entry-list">${r.calories.map((e,t)=>`
           <li>
             <span>${z(e.name)}</span>
             <span class="entry-grams">${e.kcal} cal</span>
@@ -329,33 +328,33 @@
       </details>
       ${n.calorieError&&n.calorieGoalOpen?`<p class="form-error" role="alert">${n.calorieError}</p>`:``}
 
-      ${a===null?Kr(n):`<button type="button" class="link-button" data-action="clear-calorie-goal">Change calorie goal (${a} cal)</button>`}
+      ${a===null?Gr(n):`<button type="button" class="link-button" data-action="clear-calorie-goal">Change calorie goal (${a} cal)</button>`}
     </section>
-  `}function Jr(e,t,n){return`
+  `}function qr(e,t,n){return`
     <header class="screen-header">
       <h1>Fuel</h1>
       <p class="lead">Tap to log water, protein and calories. Today's log starts fresh at midnight.</p>
     </header>
-    ${Ur(e,H(e,t).glasses)}
-    ${Gr(e,t,n)}
-    ${qr(e,t,n)}
-  `}function Yr(t){let{root:n,state:r}=t,i={...Vr};function a(e){return n.querySelector(`input[data-field="${e}"]`)?.value??``}function o(){i={name:a(`protein-name`),grams:a(`protein-grams`),goal:a(`protein-goal`),error:``,calorieName:a(`calorie-name`),calories:a(`calorie-amount`),calorieGoal:a(`calorie-goal`),calorieError:``,proteinQuickOpen:n.querySelector(`details[data-quick="protein"]`)?.open??i.proteinQuickOpen,calorieQuickOpen:n.querySelector(`details[data-quick="calories"]`)?.open??i.calorieQuickOpen,proteinGoalOpen:i.proteinGoalOpen,calorieGoalOpen:i.calorieGoalOpen}}function s(n,a,s){o();let c=e(new Date),l=r.nutrition;if(n===`water`)r.nutrition=ot(l,c,Number(a));else if(n===`water-goal`)r.nutrition={...l,waterGoal:Math.min(20,Math.max(1,l.waterGoal+Number(a)))};else if(n===`quick-protein`){let e=rt[Number(s)];e&&(r.nutrition=st(l,c,e))}else if(n===`add-protein`){let e=ht(i.name,i.grams);e?i.error=e:(r.nutrition=st(l,c,{name:i.name.trim(),grams:Number(i.grams)}),i={...i,name:``,grams:``})}else if(n===`remove-protein`)r.nutrition=ct(l,c,Number(s));else if(n===`show-protein-goal`)i.proteinGoalOpen=!0;else if(n===`show-calorie-goal`)i.calorieGoalOpen=!0;else if(n===`set-protein-goal`){let e=Number(i.goal);!Number.isInteger(e)||e<1||e>400?i.error=`Enter a protein goal in whole grams, between 1 and 400.`:(r.nutrition={...l,proteinGoal:e},i.proteinGoalOpen=!1)}else if(n===`clear-protein-goal`)i.goal=String(l.proteinGoal??``),i.proteinGoalOpen=!0,r.nutrition={...l,proteinGoal:null};else if(n===`quick-calories`){let e=it[Number(s)];e&&(r.nutrition=lt(l,c,e))}else if(n===`add-calories`){let e=ft(i.calorieName,i.calories);e?i.calorieError=e:(r.nutrition=lt(l,c,{name:i.calorieName.trim(),kcal:Number(i.calories)}),i={...i,calorieName:``,calories:``})}else if(n===`remove-calories`)r.nutrition=ut(l,c,Number(s));else if(n===`set-calorie-goal`){let e=pt(i.calorieGoal);e?i.calorieError=e:(r.nutrition={...l,calorieGoal:Number(i.calorieGoal)},i.calorieGoalOpen=!1)}else n===`clear-calorie-goal`&&(i.calorieGoal=String(l.calorieGoal??``),i.calorieGoalOpen=!0,r.nutrition={...l,calorieGoal:null});Y(r)||(i.error=`Couldn't save on this device.`),t.render()}return{screen:()=>Jr(r.nutrition,e(new Date),i),handleAction:s}}var Xr=e=>`<svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${e}</svg>`,Zr={today:Xr(`<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11" />`),progress:Xr(`<path d="M4 4v16h16M8 15l4-5 3 3 5-7" />`),fuel:Xr(`<path d="M12 3c3 4.2 6 7.2 6 11a6 6 0 0 1-12 0c0-3.8 3-6.8 6-11z" />`),profile:Xr(`<circle cx="12" cy="8" r="4" /><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" />`)},Qr=[{title:`Your week`,text:`Tap a day to see its workout. Swipe sideways to look at other weeks.`,target:`.calendar`},{title:`Start workout`,text:`At the gym, tap this. It talks you through every set and times your rest.`,target:`[data-action="start-workout"]`},{title:`Progress`,text:`Your weights and charts show up here after you log sets.`,target:`[data-nav="progress"]`},{title:`Fuel`,text:`Log water, protein and calories with a tap.`,target:`[data-nav="fuel"]`},{title:`Profile`,text:`Change your goal, workout days and equipment, and back up your data here.`,target:`[data-nav="profile"]`}];function $r(e){let t=Qr[e];if(!t)return``;let n=e===Qr.length-1;return`
-    <aside class="tour" role="region" aria-label="App tour, step ${e+1} of ${Qr.length}">
-      <p class="tour-count">${e+1} of ${Qr.length}</p>
+    ${Hr(e,H(e,t).glasses)}
+    ${Wr(e,t,n)}
+    ${Kr(e,t,n)}
+  `}function Jr(t){let{root:n,state:r}=t,i={...Br};function a(e){return n.querySelector(`input[data-field="${e}"]`)?.value??``}function o(){i={name:a(`protein-name`),grams:a(`protein-grams`),goal:a(`protein-goal`),error:``,calorieName:a(`calorie-name`),calories:a(`calorie-amount`),calorieGoal:a(`calorie-goal`),calorieError:``,proteinQuickOpen:n.querySelector(`details[data-quick="protein"]`)?.open??i.proteinQuickOpen,calorieQuickOpen:n.querySelector(`details[data-quick="calories"]`)?.open??i.calorieQuickOpen,proteinGoalOpen:i.proteinGoalOpen,calorieGoalOpen:i.calorieGoalOpen}}function s(n,a,s){o();let c=e(new Date),l=r.nutrition;if(n===`water`)r.nutrition=ot(l,c,Number(a));else if(n===`water-goal`)r.nutrition={...l,waterGoal:Math.min(20,Math.max(1,l.waterGoal+Number(a)))};else if(n===`quick-protein`){let e=rt[Number(s)];e&&(r.nutrition=st(l,c,e))}else if(n===`add-protein`){let e=ht(i.name,i.grams);e?i.error=e:(r.nutrition=st(l,c,{name:i.name.trim(),grams:Number(i.grams)}),i={...i,name:``,grams:``})}else if(n===`remove-protein`)r.nutrition=ct(l,c,Number(s));else if(n===`show-protein-goal`)i.proteinGoalOpen=!0;else if(n===`show-calorie-goal`)i.calorieGoalOpen=!0;else if(n===`set-protein-goal`){let e=Number(i.goal);!Number.isInteger(e)||e<1||e>400?i.error=`Enter a protein goal in whole grams, between 1 and 400.`:(r.nutrition={...l,proteinGoal:e},i.proteinGoalOpen=!1)}else if(n===`clear-protein-goal`)i.goal=String(l.proteinGoal??``),i.proteinGoalOpen=!0,r.nutrition={...l,proteinGoal:null};else if(n===`quick-calories`){let e=it[Number(s)];e&&(r.nutrition=lt(l,c,e))}else if(n===`add-calories`){let e=ft(i.calorieName,i.calories);e?i.calorieError=e:(r.nutrition=lt(l,c,{name:i.calorieName.trim(),kcal:Number(i.calories)}),i={...i,calorieName:``,calories:``})}else if(n===`remove-calories`)r.nutrition=ut(l,c,Number(s));else if(n===`set-calorie-goal`){let e=pt(i.calorieGoal);e?i.calorieError=e:(r.nutrition={...l,calorieGoal:Number(i.calorieGoal)},i.calorieGoalOpen=!1)}else n===`clear-calorie-goal`&&(i.calorieGoal=String(l.calorieGoal??``),i.calorieGoalOpen=!0,r.nutrition={...l,calorieGoal:null});Y(r)||(i.error=`Couldn't save on this device.`),t.render()}return{screen:()=>qr(r.nutrition,e(new Date),i),handleAction:s}}var Yr=e=>`<svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${e}</svg>`,Xr={today:Yr(`<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11" />`),library:Yr(`<circle cx="11" cy="11" r="6" /><path d="M16 16l5 5" />`),progress:Yr(`<path d="M4 4v16h16M8 15l4-5 3 3 5-7" />`),fuel:Yr(`<path d="M12 3c3 4.2 6 7.2 6 11a6 6 0 0 1-12 0c0-3.8 3-6.8 6-11z" />`),profile:Yr(`<circle cx="12" cy="8" r="4" /><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" />`)},Zr=[{title:`Your week`,text:`Tap a day to see its workout. Swipe sideways to look at other weeks.`,target:`.calendar`},{title:`Start workout`,text:`At the gym, tap this. It talks you through every set and times your rest.`,target:`[data-action="start-workout"]`},{title:`Exercises`,text:`Look up how to do any exercise, with a demo video.`,target:`[data-nav="library"]`},{title:`Progress`,text:`Your weights and charts show up here after you log sets.`,target:`[data-nav="progress"]`},{title:`Fuel`,text:`Log water, protein and calories with a tap.`,target:`[data-nav="fuel"]`},{title:`Profile`,text:`Change your goal, workout days and equipment, and back up your data here.`,target:`[data-nav="profile"]`}];function Qr(e){let t=Zr[e];if(!t)return``;let n=e===Zr.length-1;return`
+    <aside class="tour" role="region" aria-label="App tour, step ${e+1} of ${Zr.length}">
+      <p class="tour-count">${e+1} of ${Zr.length}</p>
       <h2>${t.title}</h2>
       <p>${t.text}</p>
       <div class="tour-buttons">
         ${n?``:`<button type="button" class="link-button" data-action="tour-skip">Skip tour</button>`}
         <button type="button" class="primary" data-action="${n?`tour-skip`:`tour-next`}">${n?`Done`:`Next`}</button>
       </div>
-    </aside>`}function ei(e,t){let n=Qr[t]?.target;n&&e.querySelector(n)?.classList.add(`tour-highlight`)}var ti=3;function ni(e,t,n=ti){return(e[t]??[]).filter(e=>e.sets.length>0).slice(-n).reverse()}function ri(e){return new Date(e).toLocaleDateString(void 0,{month:`short`,day:`numeric`})}function ii(e,t,n,r){let i=ni(e,t);if(i.length<2)return``;let a=i.map(e=>`<li><span class="recent-date">${ri(e.date)}</span><span>${X(e,n,r)}</span></li>`).join(``);return`
+    </aside>`}function $r(e,t){let n=Zr[t]?.target;n&&e.querySelector(n)?.classList.add(`tour-highlight`)}var ei=3;function ti(e,t,n=ei){return(e[t]??[]).filter(e=>e.sets.length>0).slice(-n).reverse()}function ni(e){return new Date(e).toLocaleDateString(void 0,{month:`short`,day:`numeric`})}function ri(e,t,n,r){let i=ti(e,t);if(i.length<2)return``;let a=i.map(e=>`<li><span class="recent-date">${ni(e.date)}</span><span>${X(e,n,r)}</span></li>`).join(``);return`
     <div class="recent-times">
       <h4>Your last ${i.length} times</h4>
       <ul>${a}</ul>
-    </div>`}var ai={youtubeId:`zt8SEmJhFuY`,title:`How to pick the right weights`,channel:`Alloy Health`},oi={youtubeId:`oBs-PE34x7g`,title:`How to use basic gym equipment`,channel:`SELF`};function si(e){return`
+    </div>`}var ii={youtubeId:`zt8SEmJhFuY`,title:`How to pick the right weights`,channel:`Alloy Health`},ai={youtubeId:`oBs-PE34x7g`,title:`How to use basic gym equipment`,channel:`SELF`};function oi(e){return`
     <a class="demo-link" href="https://www.youtube.com/watch?v=${e.youtubeId}" target="_blank" rel="noopener noreferrer">
       Watch: ${e.title} ↗<small>by ${e.channel}</small>
-    </a>`}function ci(e){return`
+    </a>`}function si(e){return`
     <header class="screen-header">
       <p class="eyebrow">New to working out?</p>
       <h1>Start here</h1>
@@ -384,7 +383,7 @@
         <li>If your form falls apart or you can't finish, go lighter.</li>
         <li>The app remembers what you did and suggests the next weight, so you don't have to work it out.</li>
       </ul>
-      ${si(ai)}
+      ${oi(ii)}
     </section>
 
     <section class="card guide-card">
@@ -395,7 +394,7 @@
         <li>Move slowly and smoothly. Don't jerk the weight.</li>
         <li>Not sure how a machine works? Tap the exercise in the app for steps and a demo, or ask the staff at the front desk.</li>
       </ul>
-      ${si(oi)}
+      ${oi(ai)}
     </section>
 
     <section class="card guide-card">
@@ -428,14 +427,14 @@
     </section>
 
     <button type="button" class="primary big" data-action="close-guide">${e}</button>
-  `}var li=[{title:`Tell us about you`,detail:`Your goal, and any injuries or sore spots to protect.`},{title:`Pick your gym's equipment`,detail:`You only get exercises that use machines your gym has.`},{title:`Follow today's workout`,detail:`Step-by-step form, a rest timer, and a voice that talks you through each set.`}];function ui(e){return`
+  `}var ci=[{title:`Tell us about you`,detail:`Your goal, and any injuries or sore spots to protect.`},{title:`Pick your gym's equipment`,detail:`You only get exercises that use machines your gym has.`},{title:`Follow today's workout`,detail:`Step-by-step form, a rest timer, and a voice that talks you through each set.`}];function li(e){return`
     <header class="screen-header">
       <h1>Welcome to Gym Guide</h1>
       <p class="lead">It tells you what to do at the gym today and shows exactly how to do each exercise. It takes about a minute to set up.</p>
     </header>
 
     <section class="card">
-      <ol class="intro-steps">${li.map((e,t)=>`
+      <ol class="intro-steps">${ci.map((e,t)=>`
       <li>
         <span class="step-number" aria-hidden="true">${t+1}</span>
         <div>
@@ -450,7 +449,7 @@
     <button type="button" class="link-button center" data-action="open-guide">New to working out? Start here</button>
 
     ${e}
-  `}var di=`CC BY 4.0`,fi=`https://creativecommons.org/licenses/by/4.0/`,Z=`https://freemusicarchive.org/music`,pi={file:`punjabi-bhangra.mp3`,title:`Punjabi Bhangra Energy Short Burst`,artist:`Alex Morgan`,source:`${Z}/alex-morgan/kids-comedy-holiday/punjabi-bhangra-energy-short-burst/`},mi={file:`boom-bap.mp3`,title:`Boom Bap Old School Hip-Hop Beat`,artist:`Alex Morgan`,source:`${Z}/alex-morgan/trap-hip-hop-beats/boom-bap-old-school-hip-hop-beat/`},hi={file:`electronic-dance.mp3`,title:`Energetic Upbeat Electronic Dance`,artist:`Music for Creators`,source:`${Z}/fretbound/single/energetic-upbeat-electronic-dance/`},gi={file:`energetic-pop.mp3`,title:`Energetic Pop Background`,artist:`AurosonMusic`,source:`${Z}/aurosonmusic/single/energetic-pop-background/`},_i={file:`bright-pop.mp3`,title:`Bright Energetic Upbeat Pop`,artist:`Music for Creators`,source:`${Z}/fretbound/single/bright-energetic-upbeat-pop/`},vi={file:`disco-funk.mp3`,title:`Mirrorglow (Upbeat & Energetic Disco Funk)`,artist:`Vlad Annenkov`,source:`${Z}/vlad-annenkov/single/upbeat-energetic-disco-funk-mirrorglowmp3/`},yi={file:`pop-rock.mp3`,title:`Neon Pulse (Energetic Pop Rock)`,artist:`Vlad Annenkov`,source:`${Z}/vlad-annenkov/single/energetic-pop-rock-neon-pulsemp3/`},bi={file:`hype-trap.mp3`,title:`Hard Hype Trap for Sports Intros`,artist:`Alex Morgan`,source:`${Z}/alex-morgan/trap-hip-hop-beats/hard-hype-trap-for-sports-intros/`},xi={file:`phonk-gym.mp3`,title:`Hard Phonk Gym Workout Track`,artist:`Alex Morgan`,source:`${Z}/alex-morgan/phonk-drift/hard-phonk-gym-workout-track/`},Si={file:`workout-edm.mp3`,title:`Workout Songs`,artist:`Alex Morgan`,source:`${Z}/alex-morgan/epic-action-sports/workout-songs/`},Ci={file:`masala-madness.mp3`,title:`Masala Madness`,artist:`Geoff Harvey - Purple Planet Music`,source:`${Z}/geoff-harvey-purple-planet-music/indian-life/masala-madness-1/`},wi={file:`mumbai-mood.mp3`,title:`Mumbai Mood`,artist:`Geoff Harvey - Purple Planet Music`,source:`${Z}/geoff-harvey-purple-planet-music/indian-life/mumbai-mood-1/`},Ti={file:`bollywood-flame.mp3`,title:`Bollywood Flame With Bright Festive Drive`,artist:`Alex Morgan`,source:`${Z}/alex-morgan/advertising-broadcast-vol-2/bollywood-flame-with-bright-festive-drive/`},Ei={file:`weekend-chill.mp3`,title:`Chill Hip Hop - Weekend Chill Beat`,artist:`AurosonMusic`,source:`${Z}/aurosonmusic/single/chill-hip-hop-weekend-chill-beat/`},Di={push:{name:`Push day mix`,songs:[bi,pi,Ci,mi,hi,vi,Si]},pull:{name:`Pull day mix`,songs:[xi,wi,hi,pi,yi,Ci,gi]},legs:{name:`Legs day mix`,songs:[bi,Ci,mi,pi,xi,vi,Si]},home:{name:`At-home abs mix`,songs:[_i,wi,gi,Ti,hi,Si]},mobility:{name:`Mobility mix`,songs:[Ei]}};function Oi(){let e=new Map;for(let t of Object.values(Di))for(let n of t.songs)e.set(n.file,n);return[...e.values()]}function ki(e){return new URL(`music/${e.file}`,document.baseURI).href}var Ai=.3,ji=8e3;function Mi(e,t,n=()=>new Audio){let r=null,i=null,a=0,o=0,s=null,c;function l(e,t){if(!r)return;let n=Di[e].songs;a=t%n.length,r.src=ki(n[a]),r.play().catch(()=>u(`Couldn't play the music. Check your connection and try again.`))}function u(e){i!==null&&(f(),t(e))}function d(){i!==null&&l(i,a+1)}function f(){window.clearTimeout(c),r&&=(r.pause(),null),i=null,s=null,o=0,e()}function p(){window.clearTimeout(c),r&&s!==null&&(r.volume=s,s=null)}function m(t){if(r&&i===t){r.play().catch(()=>u(`Couldn't play the music. Check your connection and try again.`));return}r?.pause(),r=n(),r.addEventListener(`ended`,d),r.addEventListener(`playing`,()=>{o=0}),r.addEventListener(`error`,()=>{o+=1,o>=Di[t].songs.length?u(`The music couldn't load. Check your connection and try again.`):d()}),i=t,o=0,s=null,l(t,0),e()}return{play:m,stop:f,current:()=>i,duck(){r&&s===null&&(s=r.volume,r.volume=s*Ai,c=window.setTimeout(p,ji))},restore:p}}var Ni=`gym-guide-music`;function Pi(e){return{async savedCount(){let t=await e.open(Ni),n=0;for(let e of Oi())await t.match(ki(e))&&(n+=1);return n},async save(t){navigator.storage?.persist?.().catch(()=>!1);let n=await e.open(Ni),r=0;for(let e of Oi()){let i=ki(e);if(!await n.match(i)){let t=await fetch(i,{cache:`reload`});if(!t.ok)throw Error(`${e.file} could not be downloaded (${t.status})`);await n.put(i,t)}r+=1,t(r)}},async remove(){await e.delete(Ni)}}}var Fi=70;function Ii(e,t){if(e.kind===`checking`)return``;let n;return n=e.kind===`saved`?`
+  `}var ui=`CC BY 4.0`,di=`https://creativecommons.org/licenses/by/4.0/`,Z=`https://freemusicarchive.org/music`,fi={file:`punjabi-bhangra.mp3`,title:`Punjabi Bhangra Energy Short Burst`,artist:`Alex Morgan`,source:`${Z}/alex-morgan/kids-comedy-holiday/punjabi-bhangra-energy-short-burst/`},pi={file:`boom-bap.mp3`,title:`Boom Bap Old School Hip-Hop Beat`,artist:`Alex Morgan`,source:`${Z}/alex-morgan/trap-hip-hop-beats/boom-bap-old-school-hip-hop-beat/`},mi={file:`electronic-dance.mp3`,title:`Energetic Upbeat Electronic Dance`,artist:`Music for Creators`,source:`${Z}/fretbound/single/energetic-upbeat-electronic-dance/`},hi={file:`energetic-pop.mp3`,title:`Energetic Pop Background`,artist:`AurosonMusic`,source:`${Z}/aurosonmusic/single/energetic-pop-background/`},gi={file:`bright-pop.mp3`,title:`Bright Energetic Upbeat Pop`,artist:`Music for Creators`,source:`${Z}/fretbound/single/bright-energetic-upbeat-pop/`},_i={file:`disco-funk.mp3`,title:`Mirrorglow (Upbeat & Energetic Disco Funk)`,artist:`Vlad Annenkov`,source:`${Z}/vlad-annenkov/single/upbeat-energetic-disco-funk-mirrorglowmp3/`},vi={file:`pop-rock.mp3`,title:`Neon Pulse (Energetic Pop Rock)`,artist:`Vlad Annenkov`,source:`${Z}/vlad-annenkov/single/energetic-pop-rock-neon-pulsemp3/`},yi={file:`hype-trap.mp3`,title:`Hard Hype Trap for Sports Intros`,artist:`Alex Morgan`,source:`${Z}/alex-morgan/trap-hip-hop-beats/hard-hype-trap-for-sports-intros/`},bi={file:`phonk-gym.mp3`,title:`Hard Phonk Gym Workout Track`,artist:`Alex Morgan`,source:`${Z}/alex-morgan/phonk-drift/hard-phonk-gym-workout-track/`},xi={file:`workout-edm.mp3`,title:`Workout Songs`,artist:`Alex Morgan`,source:`${Z}/alex-morgan/epic-action-sports/workout-songs/`},Si={file:`masala-madness.mp3`,title:`Masala Madness`,artist:`Geoff Harvey - Purple Planet Music`,source:`${Z}/geoff-harvey-purple-planet-music/indian-life/masala-madness-1/`},Ci={file:`mumbai-mood.mp3`,title:`Mumbai Mood`,artist:`Geoff Harvey - Purple Planet Music`,source:`${Z}/geoff-harvey-purple-planet-music/indian-life/mumbai-mood-1/`},wi={file:`bollywood-flame.mp3`,title:`Bollywood Flame With Bright Festive Drive`,artist:`Alex Morgan`,source:`${Z}/alex-morgan/advertising-broadcast-vol-2/bollywood-flame-with-bright-festive-drive/`},Ti={file:`weekend-chill.mp3`,title:`Chill Hip Hop - Weekend Chill Beat`,artist:`AurosonMusic`,source:`${Z}/aurosonmusic/single/chill-hip-hop-weekend-chill-beat/`},Ei={push:{name:`Push day mix`,songs:[yi,fi,Si,pi,mi,_i,xi]},pull:{name:`Pull day mix`,songs:[bi,Ci,mi,fi,vi,Si,hi]},legs:{name:`Legs day mix`,songs:[yi,Si,pi,fi,bi,_i,xi]},home:{name:`At-home abs mix`,songs:[gi,Ci,hi,wi,mi,xi]},mobility:{name:`Mobility mix`,songs:[Ti]}};function Di(){let e=new Map;for(let t of Object.values(Ei))for(let n of t.songs)e.set(n.file,n);return[...e.values()]}function Oi(e){return new URL(`music/${e.file}`,document.baseURI).href}var ki=.3,Ai=8e3;function ji(e,t,n=()=>new Audio){let r=null,i=null,a=0,o=0,s=null,c;function l(e,t){if(!r)return;let n=Ei[e].songs;a=t%n.length,r.src=Oi(n[a]),r.play().catch(()=>u(`Couldn't play the music. Check your connection and try again.`))}function u(e){i!==null&&(f(),t(e))}function d(){i!==null&&l(i,a+1)}function f(){window.clearTimeout(c),r&&=(r.pause(),null),i=null,s=null,o=0,e()}function p(){window.clearTimeout(c),r&&s!==null&&(r.volume=s,s=null)}function m(t){if(r&&i===t){r.play().catch(()=>u(`Couldn't play the music. Check your connection and try again.`));return}r?.pause(),r=n(),r.addEventListener(`ended`,d),r.addEventListener(`playing`,()=>{o=0}),r.addEventListener(`error`,()=>{o+=1,o>=Ei[t].songs.length?u(`The music couldn't load. Check your connection and try again.`):d()}),i=t,o=0,s=null,l(t,0),e()}return{play:m,stop:f,current:()=>i,duck(){r&&s===null&&(s=r.volume,r.volume=s*ki,c=window.setTimeout(p,Ai))},restore:p}}var Mi=`gym-guide-music`;function Ni(e){return{async savedCount(){let t=await e.open(Mi),n=0;for(let e of Di())await t.match(Oi(e))&&(n+=1);return n},async save(t){navigator.storage?.persist?.().catch(()=>!1);let n=await e.open(Mi),r=0;for(let e of Di()){let i=Oi(e);if(!await n.match(i)){let t=await fetch(i,{cache:`reload`});if(!t.ok)throw Error(`${e.file} could not be downloaded (${t.status})`);await n.put(i,t)}r+=1,t(r)}},async remove(){await e.delete(Mi)}}}var Pi=70;function Fi(e,t){if(e.kind===`checking`)return``;let n;return n=e.kind===`saved`?`
       <p class="music-status">✓ All ${t} songs are saved on this phone.</p>
       <button type="button" class="link-button" data-action="remove-music-offline">Remove saved music</button>`:e.kind===`saving`?`
       <p class="fuel-total" role="status">Saving song ${Math.min(e.done+1,t)} of ${t}…</p>
@@ -461,21 +460,21 @@
       ${e.saved>0?`<p class="hint">${e.saved} of ${t} songs are saved so far.</p>`:``}
       ${e.kind===`error`?`<p class="form-error" role="alert">${z(e.message)}</p>`:``}
       <button type="button" class="secondary" data-action="save-music-offline">${e.saved>0?`Finish saving the music`:`Save music for offline use`}</button>
-      <p class="hint small">Uses about ${Fi} MB on this phone. Do it on Wi-Fi.</p>`,`
+      <p class="hint small">Uses about ${Pi} MB on this phone. Do it on Wi-Fi.</p>`,`
     <section class="card offline-music">
       <h2>Music offline</h2>
       <p class="hint">Songs play from the internet. Save them on this phone to listen at the gym without signal.</p>
       ${n}
-    </section>`}function Li(e){let t=`caches`in window?Pi(window.caches):null,n=Oi().length,r={kind:`checking`};function i(){t?.savedCount().catch(()=>0).then(t=>{r=t===n?{kind:`saved`}:{kind:`idle`,saved:t},e.redrawProfile()})}async function a(){if(t&&r.kind!==`saving`){r={kind:`saving`,done:0},e.redrawProfile();try{await t.save(t=>{r={kind:`saving`,done:t},e.redrawProfile()}),r={kind:`saved`},e.redrawProfile(),e.showToast(`Music saved on this phone.`)}catch{r={kind:`error`,message:`Couldn't save all the music. Check your connection and free space on this phone, then try again.`,saved:await t.savedCount().catch(()=>0)},e.redrawProfile()}}}async function o(){await t?.remove(),r={kind:`idle`,saved:0},e.redrawProfile(),e.showToast(`Saved music removed. Songs will play from the internet.`)}return{card:()=>t?Ii(r,n):``,check:i,handleAction(e){if(e===`save-music-offline`)a();else if(e===`remove-music-offline`)o();else return!1;return!0}}}function Ri(e,t){let n=Di[e],r=t===e,i=r?`<button type="button" class="secondary" data-action="stop-music" aria-label="Stop music">■ Stop</button>`:`<button type="button" class="secondary" data-action="play-music" data-workout="${e}" aria-label="Play ${n.name}">▶ Play</button>`;return`
+    </section>`}function Ii(e){let t=`caches`in window?Ni(window.caches):null,n=Di().length,r={kind:`checking`};function i(){t?.savedCount().catch(()=>0).then(t=>{r=t===n?{kind:`saved`}:{kind:`idle`,saved:t},e.redrawProfile()})}async function a(){if(t&&r.kind!==`saving`){r={kind:`saving`,done:0},e.redrawProfile();try{await t.save(t=>{r={kind:`saving`,done:t},e.redrawProfile()}),r={kind:`saved`},e.redrawProfile(),e.showToast(`Music saved on this phone.`)}catch{r={kind:`error`,message:`Couldn't save all the music. Check your connection and free space on this phone, then try again.`,saved:await t.savedCount().catch(()=>0)},e.redrawProfile()}}}async function o(){await t?.remove(),r={kind:`idle`,saved:0},e.redrawProfile(),e.showToast(`Saved music removed. Songs will play from the internet.`)}return{card:()=>t?Fi(r,n):``,check:i,handleAction(e){if(e===`save-music-offline`)a();else if(e===`remove-music-offline`)o();else return!1;return!0}}}function Li(e,t){let n=Ei[e],r=t===e,i=r?`<button type="button" class="secondary" data-action="stop-music" aria-label="Stop music">■ Stop</button>`:`<button type="button" class="secondary" data-action="play-music" data-workout="${e}" aria-label="Play ${n.name}">▶ Play</button>`;return`
     <section class="card music-card row-card">
       <p class="music-name">♪ ${r?`Playing now`:n.name}</p>
       ${i}
-    </section>`}function zi(){return`
+    </section>`}function Ri(){return`
     <details class="card music-credits">
       <summary>Music credits</summary>
-      <ul>${Oi().map(e=>`<li><a href="${e.source}" target="_blank" rel="noopener noreferrer">${z(e.title)}</a> by ${z(e.artist)}</li>`).join(``)}</ul>
-      <p class="hint small">From the Free Music Archive, used under the <a href="${fi}" target="_blank" rel="noopener noreferrer">${di}</a> license. The songs by Alex Morgan are listed there as AI-generated.</p>
-    </details>`}var Bi={open:!1,feel:null,hours:``,readiness:``,error:``};function Vi(e){return`
+      <ul>${Di().map(e=>`<li><a href="${e.source}" target="_blank" rel="noopener noreferrer">${z(e.title)}</a> by ${z(e.artist)}</li>`).join(``)}</ul>
+      <p class="hint small">From the Free Music Archive, used under the <a href="${di}" target="_blank" rel="noopener noreferrer">${ui}</a> license. The songs by Alex Morgan are listed there as AI-generated.</p>
+    </details>`}var zi={open:!1,feel:null,hours:``,readiness:``,error:``};function Bi(e){return`
     <section class="card recovery-card">
       <h2>Morning check-in</h2>
       <p class="feel-question" id="feel-question">How rested do you feel?</p>
@@ -499,7 +498,7 @@
         <button type="button" class="secondary" data-action="checkin-cancel">Cancel</button>
         <button type="button" class="primary" data-action="checkin-save">Save check-in</button>
       </div>
-    </section>`}function Hi(e,t){if(t.open)return Vi(t);if(!e)return`
+    </section>`}function Vi(e,t){if(t.open)return Bi(t);if(!e)return`
       <section class="card recovery-card row-card">
         <div>
           <h2>Morning check-in</h2>
@@ -513,15 +512,15 @@
       <p class="recovery-advice">${Ln(n)}</p>
       <button type="button" class="link-button" data-action="checkin-open">Change check-in</button>
       <p class="hint small">A training suggestion, not medical advice.</p>
-    </section>`}function Ui(t){let{root:n,state:r}=t,i={...Bi};function a(){return Bn(r.recovery,e(new Date))}function o(){let e=n.querySelector(`input[data-field="checkin-hours"]`),t=n.querySelector(`input[data-field="checkin-readiness"]`);e&&(i.hours=e.value),t&&(i.readiness=t.value)}function s(n,s){if(o(),n===`checkin-open`){let e=a();i={open:!0,feel:e?.feel??null,hours:e?.hours===null||e===void 0?``:String(e.hours),readiness:e?.readiness===null||e===void 0?``:String(e.readiness),error:``}}else if(n===`checkin-feel`)i={...i,feel:Number(s),error:``};else if(n===`checkin-cancel`)i={...Bi};else if(n===`checkin-save`){let n=Hn(i.feel,i.hours,i.readiness);if(!n.ok)i={...i,error:n.error};else{r.recovery=Vn(r.recovery,{date:e(new Date),feel:n.feel,hours:n.hours,readiness:n.readiness}),i={...Bi},Y(r),t.render(),t.showToast(`Check-in saved.`);return}}t.render()}return{today:a,card:()=>Hi(a(),i),handleAction(e,t){return e.startsWith(`checkin-`)?(s(e,t),!0):!1}}}function Wi(e,t,n=null){return{day:e.day,startedAt:t.toISOString(),exercises:e.exercises,prescription:Rn(e.prescription,n),index:0,setNumber:1,phase:e.exercises.length>0?`lift`:`done`,restEndsAt:null,recoveryLevel:n}}function Q(e){return e.exercises[e.index]}function Gi(e){return e.setNumber>=e.prescription.sets}function Ki(e){return e.index>=e.exercises.length-1}function qi(e){return{...e,phase:`log`}}function Ji(e,t){if(Gi(e)&&Ki(e))return{...e,phase:`done`,restEndsAt:null};let n=t+e.prescription.restSeconds*1e3;return Gi(e)?{...e,index:e.index+1,setNumber:1,phase:`rest`,restEndsAt:n}:{...e,setNumber:e.setNumber+1,phase:`rest`,restEndsAt:n}}function Yi(e){return{...e,phase:`lift`,restEndsAt:null}}function Xi(e,t,n){let r=Math.max(e.restEndsAt??n,n);return{...e,restEndsAt:r+t*1e3}}function Zi(e){return Ki(e)?{...e,phase:`done`,restEndsAt:null}:{...e,index:e.index+1,setNumber:1,phase:`lift`,restEndsAt:null}}function Qi(e,t){let n=e.exercises.map((n,r)=>r===e.index?t:n);return{...e,exercises:n,setNumber:1,phase:`lift`,restEndsAt:null}}function $i(e,t){return e.restEndsAt===null?0:Math.max(0,Math.ceil((e.restEndsAt-t)/1e3))}function $(e,t,n){let r=yn(e,n);return r&&r.date===t.startedAt?r.sets:[]}function ea(e,t,n){let r=(e[n]??[]).filter(e=>e.date!==t.startedAt);return r[r.length-1]}function ta(e,t,n,r=`lb`){let i=y(n.exercise,t.prescription);return bn(ea(e,t,n.exercise.id),i,n.exercise.weightKind??`load`,{holdWeight:t.recoveryLevel===`easy`,weightUnit:r})}function na(e,t){let n=y(t.exercise,e.prescription);return`${n.min}–${n.max} ${n.unit}`}function ra(e){return`Exercise ${e.index+1} of ${e.exercises.length} · ${ge(e.day)}`}function ia(e,t=!1){return`
+    </section>`}function Hi(t){let{root:n,state:r}=t,i={...zi};function a(){return Bn(r.recovery,e(new Date))}function o(){let e=n.querySelector(`input[data-field="checkin-hours"]`),t=n.querySelector(`input[data-field="checkin-readiness"]`);e&&(i.hours=e.value),t&&(i.readiness=t.value)}function s(n,s){if(o(),n===`checkin-open`){let e=a();i={open:!0,feel:e?.feel??null,hours:e?.hours===null||e===void 0?``:String(e.hours),readiness:e?.readiness===null||e===void 0?``:String(e.readiness),error:``}}else if(n===`checkin-feel`)i={...i,feel:Number(s),error:``};else if(n===`checkin-cancel`)i={...zi};else if(n===`checkin-save`){let n=Hn(i.feel,i.hours,i.readiness);if(!n.ok)i={...i,error:n.error};else{r.recovery=Vn(r.recovery,{date:e(new Date),feel:n.feel,hours:n.hours,readiness:n.readiness}),i={...zi},Y(r),t.render(),t.showToast(`Check-in saved.`);return}}t.render()}return{today:a,card:()=>Vi(a(),i),handleAction(e,t){return e.startsWith(`checkin-`)?(s(e,t),!0):!1}}}function Ui(e,t,n=null){return{day:e.day,startedAt:t.toISOString(),exercises:e.exercises,prescription:Rn(e.prescription,n),index:0,setNumber:1,phase:e.exercises.length>0?`lift`:`done`,restEndsAt:null,recoveryLevel:n}}function Q(e){return e.exercises[e.index]}function Wi(e){return e.setNumber>=e.prescription.sets}function Gi(e){return e.index>=e.exercises.length-1}function Ki(e){return{...e,phase:`log`}}function qi(e,t){if(Wi(e)&&Gi(e))return{...e,phase:`done`,restEndsAt:null};let n=t+e.prescription.restSeconds*1e3;return Wi(e)?{...e,index:e.index+1,setNumber:1,phase:`rest`,restEndsAt:n}:{...e,setNumber:e.setNumber+1,phase:`rest`,restEndsAt:n}}function Ji(e){return{...e,phase:`lift`,restEndsAt:null}}function Yi(e,t,n){let r=Math.max(e.restEndsAt??n,n);return{...e,restEndsAt:r+t*1e3}}function Xi(e){return Gi(e)?{...e,phase:`done`,restEndsAt:null}:{...e,index:e.index+1,setNumber:1,phase:`lift`,restEndsAt:null}}function Zi(e,t){let n=e.exercises.map((n,r)=>r===e.index?t:n);return{...e,exercises:n,setNumber:1,phase:`lift`,restEndsAt:null}}function Qi(e,t){return e.restEndsAt===null?0:Math.max(0,Math.ceil((e.restEndsAt-t)/1e3))}function $(e,t,n){let r=yn(e,n);return r&&r.date===t.startedAt?r.sets:[]}function $i(e,t,n){let r=(e[n]??[]).filter(e=>e.date!==t.startedAt);return r[r.length-1]}function ea(e,t,n,r=`lb`){let i=y(n.exercise,t.prescription);return bn($i(e,t,n.exercise.id),i,n.exercise.weightKind??`load`,{holdWeight:t.recoveryLevel===`easy`,weightUnit:r})}function ta(e,t){let n=y(t.exercise,e.prescription);return`${n.min}–${n.max} ${n.unit}`}function na(e){return`Exercise ${e.index+1} of ${e.exercises.length} · ${ge(e.day)}`}function ra(e,t=!1){return`
     <div class="session-controls">
       <button type="button" class="link-button" data-action="toggle-voice" aria-pressed="${e}">Voice: ${e?`on`:`off`}</button>
       ${t?`<button type="button" class="link-button" data-action="skip-exercise">Skip exercise</button>`:``}
       <button type="button" class="link-button" data-action="end-workout">End workout</button>
     </div>
-  `}function aa(e,t,n,r,i,a=`lb`,o=``){let s=Q(e);if(!s)return``;let c=ea(t,e,s.exercise.id),l=y(s.exercise,e.prescription),u=ta(t,e,s,a),d=$(t,e,s.exercise.id);return`
+  `}function ia(e,t,n,r,i,a=`lb`,o=``){let s=Q(e);if(!s)return``;let c=$i(t,e,s.exercise.id),l=y(s.exercise,e.prescription),u=ea(t,e,s,a),d=$(t,e,s.exercise.id);return`
     <header class="screen-header">
-      <p class="eyebrow">${ra(e)}</p>
+      <p class="eyebrow">${na(e)}</p>
       <h1>${s.exercise.name}</h1>
     </header>
 
@@ -530,7 +529,7 @@
 
     <section class="card set-card">
       <p class="set-label">Set ${e.setNumber} of ${e.prescription.sets}</p>
-      <p class="set-target">${na(e,s)}</p>
+      <p class="set-target">${ta(e,s)}</p>
       ${c?`<p class="last-time">Last time: ${X(c,l.unit,a)}</p>`:``}
       ${e.setNumber===1?`<p class="suggestion">${u.message}</p>`:``}
       ${d.length>0?`<p class="last-time">Today so far: ${X({date:``,sets:d},l.unit,a)}</p>`:``}
@@ -551,25 +550,25 @@
       <button type="button" class="secondary" data-action="open-swap">Swap</button>
       <button type="button" class="secondary" data-action="hurt">This hurt</button>
     </div>
-    ${Ri(e.day,i)}
-    ${ia(n,!0)}
-  `}function oa(e,t){let n=e.exercises.reduce((n,r)=>n+$(t,e,r.exercise.id).length,0),r=n>0?`You've logged ${n} ${n===1?`set`:`sets`}. They're saved, and this workout will show as done on your calendar.`:`You haven't logged any sets yet, so nothing will be saved.`;return`
+    ${Li(e.day,i)}
+    ${ra(n,!0)}
+  `}function aa(e,t){let n=e.exercises.reduce((n,r)=>n+$(t,e,r.exercise.id).length,0),r=n>0?`You've logged ${n} ${n===1?`set`:`sets`}. They're saved, and this workout will show as done on your calendar.`:`You haven't logged any sets yet, so nothing will be saved.`;return`
     <header class="screen-header">
-      <p class="eyebrow">${ra(e)}</p>
+      <p class="eyebrow">${na(e)}</p>
       <h1>End this workout?</h1>
       <p class="lead">${r}</p>
     </header>
 
     <button type="button" class="primary big" data-action="confirm-end">Yes, end workout</button>
     <button type="button" class="secondary" data-action="cancel-end">Keep going</button>
-  `}function sa(e,t){let n=Q(e);if(!n)return``;let r=t.length===0?`<section class="card empty"><p>There's no other exercise for this spot with your gym's equipment. You can skip it instead.</p></section>`:t.map((e,t)=>`
+  `}function oa(e,t){let n=Q(e);if(!n)return``;let r=t.length===0?`<section class="card empty"><p>There's no other exercise for this spot with your gym's equipment. You can skip it instead.</p></section>`:t.map((e,t)=>`
         <button type="button" class="swap-option" data-action="choose-swap" data-index="${t}">
           <strong>${e.exercise.name}</strong>
           <small>${e.exercise.muscles}</small>
           ${e.cautionAreas.length>0?`<small class="swap-caution">Go easy: has a caution for you</small>`:``}
         </button>`).join(``);return`
     <header class="screen-header">
-      <p class="eyebrow">${ra(e)}</p>
+      <p class="eyebrow">${na(e)}</p>
       <h1>Swap ${n.exercise.name}</h1>
       <p class="lead">Pick another exercise that works the same muscles. ${n.exercise.name} stays in future workouts.</p>
     </header>
@@ -577,7 +576,7 @@
     <div class="swap-list">${r}</div>
 
     <button type="button" class="secondary" data-action="cancel-swap">Keep ${n.exercise.name}</button>
-  `}function ca(e,t,n,r=`lb`,i=!1){let a=Q(e);if(!a)return``;let o=a.exercise.weightKind??`load`,s=y(a.exercise,e.prescription),c=a.exercise.equipment.includes(`dumbbells`),l=o===`assist`?`Help from the machine (${r})`:c?`Weight (${r}, per dumbbell)`:`Weight (${r})`,u=(e,t,n,r)=>`
+  `}function sa(e,t,n,r=`lb`,i=!1){let a=Q(e);if(!a)return``;let o=a.exercise.weightKind??`load`,s=y(a.exercise,e.prescription),c=a.exercise.equipment.includes(`dumbbells`),l=o===`assist`?`Help from the machine (${r})`:c?`Weight (${r}, per dumbbell)`:`Weight (${r})`,u=(e,t,n,r)=>`
     <label class="stepper-label" for="log-${e}">${t}</label>
     <div class="stepper">
       <button type="button" class="step-button" data-step="${e}" data-delta="${-r}" aria-label="Less">−</button>
@@ -586,7 +585,7 @@
     </div>
   `;return`
     <header class="screen-header">
-      <p class="eyebrow">${ra(e)}</p>
+      <p class="eyebrow">${na(e)}</p>
       <h1>${i?`Fix set ${e.setNumber}`:`Set ${e.setNumber} done`}</h1>
       <p class="lead">${a.exercise.name}: ${i?`what should it say?`:`what did you do?`}</p>
     </header>
@@ -600,12 +599,12 @@
     ${i?`<button type="button" class="primary big" data-action="save-fix">Save change</button>
     <button type="button" class="secondary" data-action="cancel-fix">Cancel</button>`:`<button type="button" class="primary big" data-action="save-set">Save set</button>
     <button type="button" class="secondary" data-action="cancel-log">Back to the set</button>`}
-  `}function la(e,t){return e.exercises.flatMap(n=>$(t,e,n.exercise.id).map((e,t)=>({planned:n,setIndex:t,set:e})))}function ua(e,t,n=`lb`){let r=e.phase===`rest`,i=la(e,t).map(({planned:t,setIndex:r,set:i},a)=>{let o=y(t.exercise,e.prescription).unit===`seconds`?`sec`:`reps`,s=i.weight===null?``:`${Et(i.weight,n)} × `;return`<button type="button" class="swap-option" data-action="choose-fix" data-index="${a}">
+  `}function ca(e,t){return e.exercises.flatMap(n=>$(t,e,n.exercise.id).map((e,t)=>({planned:n,setIndex:t,set:e})))}function la(e,t,n=`lb`){let r=e.phase===`rest`,i=ca(e,t).map(({planned:t,setIndex:r,set:i},a)=>{let o=y(t.exercise,e.prescription).unit===`seconds`?`sec`:`reps`,s=i.weight===null?``:`${Et(i.weight,n)} × `;return`<button type="button" class="swap-option" data-action="choose-fix" data-index="${a}">
         <strong>${t.exercise.name}</strong>
         <small>Set ${r+1}: ${s}${i.amount} ${o}</small>
       </button>`});return`
     <header class="screen-header">
-      <p class="eyebrow">${ra(e)}</p>
+      <p class="eyebrow">${na(e)}</p>
       <h1>Fix a set</h1>
       <p class="lead">Tap the set you logged wrong.${r?` Your rest timer keeps going.`:``}</p>
     </header>
@@ -613,14 +612,14 @@
     <div class="swap-list">${i.join(``)}</div>
 
     <button type="button" class="secondary" data-action="cancel-fix">${r?`Back to rest`:`Back`}</button>
-  `}function da(e,t,n,r,i=!1){let a=Q(e);if(!a)return``;let o=e.setNumber===1?`Next exercise: <strong>${a.exercise.name}</strong>`:`Next: set ${e.setNumber} of ${e.prescription.sets}, ${a.exercise.name}`;return`
+  `}function ua(e,t,n,r,i=!1){let a=Q(e);if(!a)return``;let o=e.setNumber===1?`Next exercise: <strong>${a.exercise.name}</strong>`:`Next: set ${e.setNumber} of ${e.prescription.sets}, ${a.exercise.name}`;return`
     <header class="screen-header">
-      <p class="eyebrow">${ra(e)}</p>
+      <p class="eyebrow">${na(e)}</p>
       <h1>Rest</h1>
     </header>
 
     <section class="card rest-card">
-      <p class="timer" data-timer aria-live="off">${we($i(e,t))}</p>
+      <p class="timer" data-timer aria-live="off">${we(Qi(e,t))}</p>
       <p>${o}</p>
     </section>
 
@@ -633,22 +632,22 @@
       <summary>More</summary>
       <div class="rest-more-body">
         <button type="button" class="secondary" data-action="fix-set">Fix a set</button>
-        ${Ri(e.day,r)}
-        ${ia(n)}
+        ${Li(e.day,r)}
+        ${ra(n)}
       </div>
     </details>
-  `}function fa(e,t,n){let r=Dn(t,e.startedAt,e=>o[e]?o[e].weightKind??`load`:null);if(r.length===0)return``;let i=r.map(({exerciseId:e,value:t,previous:r})=>{let i=o[e],a=i.weightKind??`load`,s=a===`bodyweight`?i.timedSeconds?`sec`:`reps`:n,c=e=>G(a===`bodyweight`?e:W(e,n));return`<li><strong>${i.name}</strong>: ${c(t)} ${s} <span class="hint">(was ${c(r)} ${s})</span></li>`}).join(``);return`
+  `}function da(e,t,n){let r=Dn(t,e.startedAt,e=>o[e]?o[e].weightKind??`load`:null);if(r.length===0)return``;let i=r.map(({exerciseId:e,value:t,previous:r})=>{let i=o[e],a=i.weightKind??`load`,s=a===`bodyweight`?i.timedSeconds?`sec`:`reps`:n,c=e=>G(a===`bodyweight`?e:W(e,n));return`<li><strong>${i.name}</strong>: ${c(t)} ${s} <span class="hint">(was ${c(r)} ${s})</span></li>`}).join(``);return`
     <section class="card highlights-card">
       <h2>🏆 New personal best${r.length===1?``:`s`}</h2>
       <ul class="summary">${i}</ul>
-    </section>`}function pa(e,t,n,r=`lb`){let i=e.exercises.map(n=>{let i=$(t,e,n.exercise.id),a=y(n.exercise,e.prescription).unit,o=i.length>0?X({date:``,sets:i},a,r):`skipped`;return`<li><strong>${n.exercise.name}</strong><br /><span class="hint">${o}</span></li>`}).join(``);return`
+    </section>`}function fa(e,t,n,r=`lb`){let i=e.exercises.map(n=>{let i=$(t,e,n.exercise.id),a=y(n.exercise,e.prescription).unit,o=i.length>0?X({date:``,sets:i},a,r):`skipped`;return`<li><strong>${n.exercise.name}</strong><br /><span class="hint">${o}</span></li>`}).join(``);return`
     <header class="screen-header">
       <p class="eyebrow">Workout done</p>
       <h1>Nice work!</h1>
       <p class="lead">Your sets are saved, so next time you'll see what you did today.</p>
     </header>
 
-    ${fa(e,t,r)}
+    ${da(e,t,r)}
 
     <section class="card">
       <h2>Today</h2>
@@ -663,27 +662,27 @@
 
     <button type="button" class="secondary" data-action="fix-set">Fix a set</button>
     <button type="button" class="primary" data-action="close-session">Back to workouts</button>
-  `}function ma(e,t){let n=y(t.exercise,e.prescription);return`${n.min} to ${n.max} ${n.unit}`}function ha(e,t,n=`lb`){let r=Q(e);if(!r)return``;let i=[e.setNumber===1?`${r.exercise.name}.`:``,`Set ${e.setNumber} of ${e.prescription.sets}.`,`${ma(e,r)}.`],a=ta(t,e,r,n);return e.setNumber===1&&a.weight!==null&&i.push(`Try ${G(W(a.weight,n))} ${Ot(n)}.`),i.filter(Boolean).join(` `)}function ga(e){return`Rest ${e.prescription.restSeconds} seconds.`}function _a(e){let t=Q(e);return t?e.setNumber===1?`10 seconds. Next up, ${t.exercise.name}.`:`10 seconds. Get ready for set ${e.setNumber}.`:``}var va=10,ya=30,ba=`If the pain was sharp or keeps coming back, stop and get it checked.`;function xa(e,t){let{root:n,state:r,music:i}=e,a=!0,o={weight:``,amount:``},s=``,c,l=!1,u=``,d=null,f=!1,p=null;function m(e){a&&e&&dn(e,{onStart:i.duck,onEnd:i.restore})}function h(){let n=r.session;if(!n)return``;if(f)return oa(n,r.history);if(p){let e=p.editing,t=e?n.exercises.findIndex(t=>t.exercise.id===e.exerciseId):-1;return e&&t>=0?ca({...n,index:t,setNumber:e.setIndex+1},o,s,r.weightUnit,!0):ua(n,r.history,r.weightUnit)}switch(n.phase){case`lift`:return d?sa(n,d):aa(n,r.history,a,u,i.current(),r.weightUnit,r.machineNotes[Q(n)?.exercise.id??``]??``);case`log`:return ca(n,o,s,r.weightUnit);case`rest`:return da(n,Date.now(),a,i.current(),e.root.querySelector(`details.rest-more`)?.open??!1);case`done`:return pa(n,r.history,t.workoutFor(n.day).coolDown,r.weightUnit)}}function g(){let e=r.session,t=e&&Q(e);if(!e||!t)return;let n=$(r.history,e,t.exercise.id),i=n[n.length-1],a=ta(r.history,e,t,r.weightUnit),c=y(t.exercise,e.prescription),l=i?.weight??a.weight;o={weight:l==null?``:String(W(l,r.weightUnit)),amount:String(i?.amount??c.max)},s=``}function _(e){return n.querySelector(`input[data-field="${e}"]`)?.value.trim()??``}function v(t){let n=(t.exercise.weightKind??`load`)===`bodyweight`;o={weight:_(`weight`),amount:_(`amount`)};let i=Number(o.amount);if(!Number.isInteger(i)||i<1||i>300)return s=`Enter how many reps (or seconds) you did, as a whole number.`,e.render(),null;let a=null;if(!n){if(a=Number(o.weight),o.weight===``||!Number.isFinite(a)||a<0||a>1e3)return s=`Enter the weight in ${Ot(r.weightUnit)}. Use 0 if there was no added weight.`,e.render(),null;a=Tt(a,r.weightUnit)}return{weight:a,amount:i}}function ee(t,n){let i=r.session,a=i&&$(r.history,i,t)[n];i&&a&&p&&(p={editing:{exerciseId:t,setIndex:n}},o={weight:a.weight===null?``:String(W(a.weight,r.weightUnit)),amount:String(a.amount)},s=``,e.render(),window.scrollTo(0,0))}function b(){p=null;let t=r.session;if(t?.phase===`rest`&&$i(t,Date.now())===0){r.session=Yi(t),Y(r),C();return}e.render(),window.scrollTo(0,0)}function x(){let e=r.session,t=p?.editing,n=e?.exercises.find(e=>e.exercise.id===t?.exerciseId);if(!e||!t||!n)return;let i=v(n);i&&(r.history=Sn(r.history,t.exerciseId,e.startedAt,t.setIndex,i),Y(r),b())}function S(){let e=r.session,t=e&&Q(e);if(!e||!t)return;let n=v(t);n&&(r.history=xn(r.history,t.exercise.id,e.startedAt,n),r.session=Ji(e,Date.now()),Y(r),C())}function C(n=!0){window.clearInterval(c);let i=r.session;i&&(i.phase===`rest`?(l=$i(i,Date.now())<=va,m(ga(i)),c=window.setInterval(w,250)):i.phase===`lift`?n&&m(ha(i,r.history,r.weightUnit)):i.phase===`done`&&(_n(!1),t.completeWorkout(i.day),Y(r),m(`Workout complete. Nice work!`),pn([200,100,200])),e.render(),window.scrollTo(0,0))}function w(){let e=r.session;if(!e||e.phase!==`rest`){window.clearInterval(c);return}let t=$i(e,Date.now()),i=n.querySelector(`[data-timer]`);i&&(i.textContent=we(t)),!l&&t<=va&&t>0&&(l=!0,m(_a(e))),t===0&&!p&&(pn([300]),r.session=Yi(e),Y(r),m(`Go.`),window.setTimeout(()=>C(),a?900:0),window.clearInterval(c))}function T(){window.clearInterval(c),p=null,d=null,f=!1,_n(!1),r.session=null,e.resetCalendarSelection(),Y(r),e.go(`today`)}function te(){let e=r.session,n=e&&Q(e);if(!e||!n||!r.profile)return;t.setAvoided(n.exercise.id,!0);let i=e.exercises.map(e=>e.exercise.id),[a]=F(n,r.profile,r.equipmentIds,i);a?(r.session=Qi(e,a),u=`Switched from ${n.exercise.name} to ${a.exercise.name}, which works the same muscles. ${ba}`,m(`Switched to ${a.exercise.name}.`)):(r.session=Zi(e),u=`Skipped ${n.exercise.name}. There's no gentler option for it with your equipment. ${ba}`),Y(r),C(!a)}function ne(o,s){let c=r.session;if(c){if(o!==`hurt`&&o!==`toggle-voice`&&(u=``),o===`open-swap`){let t=Q(c);if(!t||!r.profile)return;let n=c.exercises.map(e=>e.exercise.id);d=F(t,r.profile,r.equipmentIds,n),e.render(),window.scrollTo(0,0)}else if(o===`choose-swap`){let e=d?.[Number(s)];if(d=null,!e)return;r.session=Qi(c,e),Y(r),C()}else if(o===`cancel-swap`)d=null,e.render();else if(o===`hurt`)te();else if(o===`set-done`)r.session=qi(c),g(),e.render(),n.querySelector(`input[data-field="amount"]`)?.select();else if(o===`cancel-log`)r.session={...c,phase:`lift`},Y(r),e.render(),window.scrollTo(0,0);else if(o===`save-set`)S();else if(o===`fix-set`)p={editing:null},e.render(),window.scrollTo(0,0);else if(o===`choose-fix`){let e=la(c,r.history)[Number(s)];e&&ee(e.planned.exercise.id,e.setIndex)}else o===`save-fix`?x():o===`cancel-fix`?b():o===`add-rest`?(r.session=Xi(c,ya,Date.now()),l=!1,Y(r),w()):o===`skip-rest`?(r.session=Yi(c),Y(r),C()):o===`skip-exercise`?(r.session=Zi(c),Y(r),C()):o===`play-music`?i.play(c.day):o===`stop-music`?i.stop():o===`toggle-voice`?(a=!a,a||window.speechSynthesis?.cancel(),e.render()):o===`end-workout`?(f=!0,e.render(),window.scrollTo(0,0)):o===`cancel-end`?(f=!1,e.render()):o===`confirm-end`?(c.exercises.some(e=>$(r.history,c,e.exercise.id).length>0)&&t.completeWorkout(c.day),T()):o===`close-session`&&T()}}return{screen:h,handleAction:ne,begin(e,t){r.session=Wi(e,new Date,t),Y(r),_n(!0),C()},resume(){r.session&&(r.session.phase===`rest`&&$i(r.session,Date.now())===0&&(r.session=Yi(r.session)),r.session.phase===`log`&&g(),_n(r.session.phase!==`done`),r.session.phase===`rest`&&(c=window.setInterval(w,250)))}}}var Sa=`<p class="notice save-warning" role="alert">This phone isn't letting the app save right now, so what you log could be lost when you close this page. Free up some storage, or open the app outside a private tab.</p>`;function Ca(t){let n=Qt(),r=n.profile?n.equipmentConfirmed?`today`:`equipment`:`intro`,i=e(new Date),a=null,s=0,c=null,l=n.profile?{...n.profile}:{...U},u,p=!1,m=!1,h=``,g=`all`,_=!1,v=`today`,b=null;nn(()=>queueMicrotask(N));let x=Mi(N,D),S={root:t,state:n,music:x,render:N,showToast:D,go:O,redrawProfile:j,resetCalendarSelection:oe},C=vn(S),w=vr(S),T=Li(S),te=Yr(S),ne=Ui(S),re=xa(S,{workoutFor:ye,completeWorkout:we,setAvoided:L});function E(e){D(Y(n)?e:`Couldn't save on this device — changes last until you close the page.`)}function D(e){let n=t.querySelector(`.toast`);n&&(n.textContent=e,n.classList.add(`visible`),window.clearTimeout(u),u=window.setTimeout(()=>n.classList.remove(`visible`),2500))}function O(e){r=e,b=null,e===`profile`&&(l=n.profile?{...n.profile}:{...U}),N(),Br(t),window.scrollTo(0,0)}function k(){return v===`profile`?`Back to your profile`:v===`today`?`Back to your workout`:`Back`}function A(){return`
+  `}function pa(e,t){let n=y(t.exercise,e.prescription);return`${n.min} to ${n.max} ${n.unit}`}function ma(e,t,n=`lb`){let r=Q(e);if(!r)return``;let i=[e.setNumber===1?`${r.exercise.name}.`:``,`Set ${e.setNumber} of ${e.prescription.sets}.`,`${pa(e,r)}.`],a=ea(t,e,r,n);return e.setNumber===1&&a.weight!==null&&i.push(`Try ${G(W(a.weight,n))} ${Ot(n)}.`),i.filter(Boolean).join(` `)}function ha(e){return`Rest ${e.prescription.restSeconds} seconds.`}function ga(e){let t=Q(e);return t?e.setNumber===1?`10 seconds. Next up, ${t.exercise.name}.`:`10 seconds. Get ready for set ${e.setNumber}.`:``}var _a=10,va=30,ya=`If the pain was sharp or keeps coming back, stop and get it checked.`;function ba(e,t){let{root:n,state:r,music:i}=e,a=!0,o={weight:``,amount:``},s=``,c,l=!1,u=``,d=null,f=!1,p=null;function m(e){a&&e&&dn(e,{onStart:i.duck,onEnd:i.restore})}function h(){let n=r.session;if(!n)return``;if(f)return aa(n,r.history);if(p){let e=p.editing,t=e?n.exercises.findIndex(t=>t.exercise.id===e.exerciseId):-1;return e&&t>=0?sa({...n,index:t,setNumber:e.setIndex+1},o,s,r.weightUnit,!0):la(n,r.history,r.weightUnit)}switch(n.phase){case`lift`:return d?oa(n,d):ia(n,r.history,a,u,i.current(),r.weightUnit,r.machineNotes[Q(n)?.exercise.id??``]??``);case`log`:return sa(n,o,s,r.weightUnit);case`rest`:return ua(n,Date.now(),a,i.current(),e.root.querySelector(`details.rest-more`)?.open??!1);case`done`:return fa(n,r.history,t.workoutFor(n.day).coolDown,r.weightUnit)}}function g(){let e=r.session,t=e&&Q(e);if(!e||!t)return;let n=$(r.history,e,t.exercise.id),i=n[n.length-1],a=ea(r.history,e,t,r.weightUnit),c=y(t.exercise,e.prescription),l=i?.weight??a.weight;o={weight:l==null?``:String(W(l,r.weightUnit)),amount:String(i?.amount??c.max)},s=``}function _(e){return n.querySelector(`input[data-field="${e}"]`)?.value.trim()??``}function v(t){let n=(t.exercise.weightKind??`load`)===`bodyweight`;o={weight:_(`weight`),amount:_(`amount`)};let i=Number(o.amount);if(!Number.isInteger(i)||i<1||i>300)return s=`Enter how many reps (or seconds) you did, as a whole number.`,e.render(),null;let a=null;if(!n){if(a=Number(o.weight),o.weight===``||!Number.isFinite(a)||a<0||a>1e3)return s=`Enter the weight in ${Ot(r.weightUnit)}. Use 0 if there was no added weight.`,e.render(),null;a=Tt(a,r.weightUnit)}return{weight:a,amount:i}}function ee(t,n){let i=r.session,a=i&&$(r.history,i,t)[n];i&&a&&p&&(p={editing:{exerciseId:t,setIndex:n}},o={weight:a.weight===null?``:String(W(a.weight,r.weightUnit)),amount:String(a.amount)},s=``,e.render(),window.scrollTo(0,0))}function b(){p=null;let t=r.session;if(t?.phase===`rest`&&Qi(t,Date.now())===0){r.session=Ji(t),Y(r),C();return}e.render(),window.scrollTo(0,0)}function x(){let e=r.session,t=p?.editing,n=e?.exercises.find(e=>e.exercise.id===t?.exerciseId);if(!e||!t||!n)return;let i=v(n);i&&(r.history=Sn(r.history,t.exerciseId,e.startedAt,t.setIndex,i),Y(r),b())}function S(){let e=r.session,t=e&&Q(e);if(!e||!t)return;let n=v(t);n&&(r.history=xn(r.history,t.exercise.id,e.startedAt,n),r.session=qi(e,Date.now()),Y(r),C())}function C(n=!0){window.clearInterval(c);let i=r.session;i&&(i.phase===`rest`?(l=Qi(i,Date.now())<=_a,m(ha(i)),c=window.setInterval(w,250)):i.phase===`lift`?n&&m(ma(i,r.history,r.weightUnit)):i.phase===`done`&&(_n(!1),t.completeWorkout(i.day),Y(r),m(`Workout complete. Nice work!`),pn([200,100,200])),e.render(),window.scrollTo(0,0))}function w(){let e=r.session;if(!e||e.phase!==`rest`){window.clearInterval(c);return}let t=Qi(e,Date.now()),i=n.querySelector(`[data-timer]`);i&&(i.textContent=we(t)),!l&&t<=_a&&t>0&&(l=!0,m(ga(e))),t===0&&!p&&(pn([300]),r.session=Ji(e),Y(r),m(`Go.`),window.setTimeout(()=>C(),a?900:0),window.clearInterval(c))}function T(){window.clearInterval(c),p=null,d=null,f=!1,_n(!1),r.session=null,e.resetCalendarSelection(),Y(r),e.go(`today`)}function te(){let e=r.session,n=e&&Q(e);if(!e||!n||!r.profile)return;t.setAvoided(n.exercise.id,!0);let i=e.exercises.map(e=>e.exercise.id),[a]=F(n,r.profile,r.equipmentIds,i);a?(r.session=Zi(e,a),u=`Switched from ${n.exercise.name} to ${a.exercise.name}, which works the same muscles. ${ya}`,m(`Switched to ${a.exercise.name}.`)):(r.session=Xi(e),u=`Skipped ${n.exercise.name}. There's no gentler option for it with your equipment. ${ya}`),Y(r),C(!a)}function ne(o,s){let c=r.session;if(c){if(o!==`hurt`&&o!==`toggle-voice`&&(u=``),o===`open-swap`){let t=Q(c);if(!t||!r.profile)return;let n=c.exercises.map(e=>e.exercise.id);d=F(t,r.profile,r.equipmentIds,n),e.render(),window.scrollTo(0,0)}else if(o===`choose-swap`){let e=d?.[Number(s)];if(d=null,!e)return;r.session=Zi(c,e),Y(r),C()}else if(o===`cancel-swap`)d=null,e.render();else if(o===`hurt`)te();else if(o===`set-done`)r.session=Ki(c),g(),e.render(),n.querySelector(`input[data-field="amount"]`)?.select();else if(o===`cancel-log`)r.session={...c,phase:`lift`},Y(r),e.render(),window.scrollTo(0,0);else if(o===`save-set`)S();else if(o===`fix-set`)p={editing:null},e.render(),window.scrollTo(0,0);else if(o===`choose-fix`){let e=ca(c,r.history)[Number(s)];e&&ee(e.planned.exercise.id,e.setIndex)}else o===`save-fix`?x():o===`cancel-fix`?b():o===`add-rest`?(r.session=Yi(c,va,Date.now()),l=!1,Y(r),w()):o===`skip-rest`?(r.session=Ji(c),Y(r),C()):o===`skip-exercise`?(r.session=Xi(c),Y(r),C()):o===`play-music`?i.play(c.day):o===`stop-music`?i.stop():o===`toggle-voice`?(a=!a,a||window.speechSynthesis?.cancel(),e.render()):o===`end-workout`?(f=!0,e.render(),window.scrollTo(0,0)):o===`cancel-end`?(f=!1,e.render()):o===`confirm-end`?(c.exercises.some(e=>$(r.history,c,e.exercise.id).length>0)&&t.completeWorkout(c.day),T()):o===`close-session`&&T()}}return{screen:h,handleAction:ne,begin(e,t){r.session=Ui(e,new Date,t),Y(r),_n(!0),C()},resume(){r.session&&(r.session.phase===`rest`&&Qi(r.session,Date.now())===0&&(r.session=Ji(r.session)),r.session.phase===`log`&&g(),_n(r.session.phase!==`done`),r.session.phase===`rest`&&(c=window.setInterval(w,250)))}}}var xa=`<p class="notice save-warning" role="alert">This phone isn't letting the app save right now, so what you log could be lost when you close this page. Free up some storage, or open the app outside a private tab.</p>`;function Sa(t){let n=Qt(),r=n.profile?n.equipmentConfirmed?`today`:`equipment`:`intro`,i=e(new Date),a=null,s=0,c=null,l=n.profile?{...n.profile}:{...U},u,p=!1,m=!1,h=``,g=`all`,_=!1,v=`today`,b=null;nn(()=>queueMicrotask(N));let x=ji(N,D),S={root:t,state:n,music:x,render:N,showToast:D,go:O,redrawProfile:j,resetCalendarSelection:oe},C=vn(S),w=_r(S),T=Ii(S),te=Jr(S),ne=Hi(S),re=ba(S,{workoutFor:ye,completeWorkout:we,setAvoided:L});function E(e){D(Y(n)?e:`Couldn't save on this device — changes last until you close the page.`)}function D(e){let n=t.querySelector(`.toast`);n&&(n.textContent=e,n.classList.add(`visible`),window.clearTimeout(u),u=window.setTimeout(()=>n.classList.remove(`visible`),2500))}function O(e){r=e,b=null,e===`profile`&&(l=n.profile?{...n.profile}:{...U}),N(),zr(t),window.scrollTo(0,0)}function k(){return v===`profile`?`Back to your profile`:v===`today`?`Back to your workout`:`Back`}function A(){return`
       <section class="card row-card">
         <div>
           <h2>New to working out?</h2>
         </div>
         <button type="button" class="secondary" data-action="open-guide">Start here</button>
-      </section>`}function j(){r===`profile`&&!n.session&&N()}function ie(){return n.workoutLog.length===0&&Object.keys(n.history).length===0}function ae(e){let r=t.querySelector(`input[data-field="machine-note"][data-exercise="${e}"]`);if(!r||!o[e])return;let i=Ue(r.value),a={...n.machineNotes};i?a[e]=i:delete a[e],n.machineNotes=a,Y(n),r.value=i,D(i?`Saved. It will show here next time.`:`Note cleared.`)}function oe(){i=e(new Date),s=0,c=null}function se(e){let t=Math.min(12,Math.max(-4,e));if(t===s)return;s=t,c=null;let r=f(new Date,(n.profile??U).weekPlan,n.workoutLog,s);i=(r.find(e=>e.isToday)??r[0]).key,N()}function M(e){let t=e?n.session?.day:r===`today`?z().shown:null;return t?` type-${t}`:``}function N(){let e=t.querySelector(`details.profile-more`);e&&(p=e.open);let r=t.querySelector(`details.setup-options`);r&&(_=r.open);let i=t.querySelector(`details.focus-picker`);i&&(m=i.open);let o=n.profile!==null&&n.equipmentConfirmed,s=n.session!==null;document.body.classList.toggle(`has-nav`,o&&!s);let c=Rr(document.activeElement,t);t.innerHTML=`
-      <main class="screen${M(s)}">${tn()?Sa:``}${s?re.screen():P()}</main>
+      </section>`}function j(){r===`profile`&&!n.session&&N()}function ie(){return n.workoutLog.length===0&&Object.keys(n.history).length===0}function ae(e){let r=t.querySelector(`input[data-field="machine-note"][data-exercise="${e}"]`);if(!r||!o[e])return;let i=Ue(r.value),a={...n.machineNotes};i?a[e]=i:delete a[e],n.machineNotes=a,Y(n),r.value=i,D(i?`Saved. It will show here next time.`:`Note cleared.`)}function oe(){i=e(new Date),s=0,c=null}function se(e){let t=Math.min(12,Math.max(-4,e));if(t===s)return;s=t,c=null;let r=f(new Date,(n.profile??U).weekPlan,n.workoutLog,s);i=(r.find(e=>e.isToday)??r[0]).key,N()}function M(e){let t=e?n.session?.day:r===`today`?z().shown:null;return t?` type-${t}`:``}function N(){let e=t.querySelector(`details.profile-more`);e&&(p=e.open);let r=t.querySelector(`details.setup-options`);r&&(_=r.open);let i=t.querySelector(`details.focus-picker`);i&&(m=i.open);let o=n.profile!==null&&n.equipmentConfirmed,s=n.session!==null;document.body.classList.toggle(`has-nav`,o&&!s);let c=Lr(document.activeElement,t);t.innerHTML=`
+      <main class="screen${M(s)}">${tn()?xa:``}${s?re.screen():P()}</main>
       ${o&&!s?B():``}
-      ${a!==null&&o&&!s?$r(a):``}
+      ${a!==null&&o&&!s?Qr(a):``}
       <div class="toast" role="status" aria-live="polite"></div>
-    `,a!==null&&o&&!s&&ei(t,a),c&&zr(t,c)}function P(){if(r===`intro`)return ui(C.card(!0));if(r===`guide`)return ci(k());if(r===`profile`)return de();if(r===`equipment`)return he();if(r===`library`)return fr(h,g,n.equipmentIds,n.profile?.protectedAreas??[]);if(r===`progress`){let e=(n.profile??U).weekPlan.filter(Boolean).length;return ir(n.history,new Date,e,n.recovery,n.weightUnit)}return r===`fuel`?te.screen():Ae()}function F(e,t,n,r,i=``){return`<button type="button" class="chip${r?` active`:``}" data-group="${e}" data-value="${t}" aria-pressed="${r}">
+    `,a!==null&&o&&!s&&$r(t,a),c&&Rr(t,c)}function P(){if(r===`intro`)return li(C.card(!0));if(r===`guide`)return si(k());if(r===`profile`)return de();if(r===`equipment`)return he();if(r===`library`)return fr(h,g,n.equipmentIds,n.profile?.protectedAreas??[]);if(r===`progress`){let e=(n.profile??U).weekPlan.filter(Boolean).length;return ir(n.history,new Date,e,n.recovery,n.weightUnit)}return r===`fuel`?te.screen():Ae()}function F(e,t,n,r,i=``){return`<button type="button" class="chip${r?` active`:``}" data-group="${e}" data-value="${t}" aria-pressed="${r}">
       <span>${n}</span>${i?`<small>${i}</small>`:``}
     </button>`}function ce(){return`
       <details class="card switcher profile-more"${p?` open`:``}>
         <summary>More: calendar, music and backup</summary>
         <div class="more-body">
-          ${br(n.calendar,fe(n.profile??U),b)}
+          ${yr(n.calendar,fe(n.profile??U),b)}
           ${T.card()}
           ${C.card(!1)}
-          ${zi()}
+          ${Ri()}
         </div>
       </details>`}function le(){return`
       <section class="card">
@@ -697,7 +696,7 @@
       <section class="card">
         ${R(`📅`,`purple`,`Your week`)}
         <p class="hint">Pick a workout for each day, or Rest. Legs days include abs.</p>
-        ${Mr(l.weekPlan,l.focusPlan,m)}
+        ${jr(l.weekPlan,l.focusPlan,m)}
       </section>`}function ue(e){return`
       <details class="card switcher setup-options"${_?` open`:``}>
         <summary>Optional: weight units and workout days</summary>
@@ -785,7 +784,7 @@
             </span>
             <span class="chevron" aria-hidden="true"></span>
           </summary>
-          ${ii(n.history,i.id,r,n.weightUnit)}
+          ${ri(n.history,i.id,r,n.weightUnit)}
           ${Se(e)}
           ${Ce(e)}
           ${We(i.id,n.machineNotes[i.id]??``)}
@@ -797,17 +796,16 @@
         <summary>Switch today's workout</summary>
         <p class="hint">Want a different one today? Pick it here. Your week plan stays as it is.</p>
         ${ve(e,`Workout for today`)}
-      </details>`}function Ee(e){if(!e)return``;let t=new Date;return Je(n.deload,t)?Pr():Xe(n.workoutLog,t,n.deload)?Fr(Ye(n.workoutLog,t,n.deload.easyWeeks)):``}function Oe(e){return e?ne.card():``}function Ae(){let{week:e,selected:t,shown:r}=z(),i=Dr(e,t.key,s);if(r===null)return`
+      </details>`}function Ee(e){if(!e)return``;let t=new Date;return Je(n.deload,t)?Nr():Xe(n.workoutLog,t,n.deload)?Pr(Ye(n.workoutLog,t,n.deload.easyWeeks)):``}function Oe(e){return e?ne.card():``}function Ae(){let{week:e,selected:t,shown:r}=z(),i=Er(e,t.key,s);if(r===null)return`
         <header class="screen-header">
-          <p class="eyebrow">${Cr(t)}</p>
+          <p class="eyebrow">${Sr(t)}</p>
           <h1>Rest day</h1>
         </header>
         ${i}
         ${Oe(t.isToday)}
         ${Ee(t.isToday)}
         ${ie()?A():``}
-        ${kr(t)}
-        ${pr()}
+        ${Or(t)}
       `;let a=ye(r,be(t.weekdayIndex,r)),o=t.status===`done`,c=t.status===`missed`,l=t.isToday&&!o,u=e.some(e=>e.isToday&&e.status!==`done`),f=a.exercises.length>0,p=f?a.exercises.map((e,t)=>ge(e,t,y(e.exercise,a.prescription).unit)).join(``):`<section class="card empty">
            <p>None of your gym's equipment fits this day yet.</p>
            <button type="button" class="secondary" data-action="go-equipment">Check your equipment</button>
@@ -815,7 +813,7 @@
              <p class="hint start-hint">Talks you through each set with a rest timer. Headphones recommended.</p>`:c?`<p class="notice">○ This one wasn't logged. It was planned for ${d[t.weekdayIndex]}.</p>
                ${u?`<button type="button" class="secondary" data-action="do-today" data-workout="${r}">Do it today instead</button>`:``}`:`<p class="hint start-hint">Coming up. You can start it on the day.</p>`:``;return`
       <header class="screen-header">
-        <p class="eyebrow">${t.isToday?`Today's workout`:Cr(t)}</p>
+        <p class="eyebrow">${t.isToday?`Today's workout`:Sr(t)}</p>
         <h1>${_e(r,a.title)}</h1>
         ${n.profile?`<p class="hint plan-summary">${xt(n.profile)}</p>`:``}
       </header>
@@ -835,7 +833,6 @@
 
       <p class="tap-hint">Tap an exercise to see how to do it. ${ee(a.prescription)}</p>
       <div class="exercise-list">${p}</div>
-      ${pr()}
 
       <details class="card switcher">
         <summary>Cool down</summary>
@@ -843,8 +840,8 @@
         ${xe(a.coolDown,`warm-up`)}
       </details>
 
-      ${Ri(r,x.current())}
+      ${Li(r,x.current())}
       ${l?Te(r):``}
 
       ${f&&l?`<button type="button" class="link-button center" data-action="finish-workout">Mark done without workout mode</button>`:``}
-    `}function B(){let e=r===`guide`?v:r===`library`?`today`:r,t=t=>e===t||t===`profile`&&e===`equipment`,n=(e,n)=>`<button type="button" class="nav-item${t(e)?` active`:``}"${t(e)?` aria-current="page"`:``} data-nav="${e}">${Zr[e]??``}<span>${n}</span></button>`;return`<nav class="bottom-nav" aria-label="Main">${n(`today`,`Workout`)}${n(`progress`,`Progress`)}${n(`fuel`,`Fuel`)}${n(`profile`,`Profile`)}</nav>`}t.addEventListener(`change`,e=>{let t=e.target;if(t.dataset.field===`restore-file`){let e=t.files?.[0];e&&C.handleFileChosen(e);return}t.dataset.field===`cal-time`&&ke(t.value)?(n.calendar={...n.calendar,time:t.value},Y(n)):t.dataset.field===`cal-minutes`&&De.includes(Number(t.value))&&(n.calendar={...n.calendar,minutes:Number(t.value)},Y(n))});let je=null;t.addEventListener(`input`,e=>{let r=e.target;if(r.dataset.field!==`library-search`)return;h=r.value;let i=t.querySelector(`.library-list`);i&&(i.innerHTML=dr(h,g,n.equipmentIds,n.profile?.protectedAreas??[]))}),t.addEventListener(`touchstart`,e=>{let t=e.touches[0];je=e.target.closest(`.calendar, .week-nav`)&&t?{x:t.clientX,y:t.clientY}:null}),t.addEventListener(`touchend`,e=>{let t=e.changedTouches[0],r=je;if(je=null,!r||!t||n.session)return;let i=t.clientX-r.x,a=t.clientY-r.y;Math.abs(i)>=50&&Math.abs(i)>1.5*Math.abs(a)&&se(s+(i<0?1:-1))}),t.addEventListener(`click`,u=>{let d=u.target.closest(`[data-point]`);if(d){let e=d.closest(`.progress-card`)?.querySelector(`.chart-caption`);e&&(e.textContent=d.dataset.point??``);return}let f=u.target.closest(`button`);if(!f)return;let{group:p,value:m,action:h,day:_,date:ee,nav:y,step:k,delta:A,exercise:j,index:ie,planDay:M,planWorkout:P,workout:F,focusDay:ce,focus:le}=f.dataset;if(k&&A){let e=t.querySelector(`input[data-field="${k}"]`);e&&(e.value=String(Math.max(0,(Number(e.value)||0)+Number(A))));return}if(M!==void 0&&P){let e=Number(M),t=P===`rest`?null:P,n=l.weekPlan.map((n,r)=>r===e?t:n);if(!n.some(Boolean)){D(`Keep at least one workout day.`);return}l.weekPlan=n,l.focusPlan=l.focusPlan.map((t,n)=>n===e?null:t),N();return}if(ce!==void 0&&le){let e=Number(ce),t=le===`balanced`?null:le;l.focusPlan=l.focusPlan.map((n,r)=>r===e?t:n),N();return}if(p&&m){if(p===`goal`&&(l.goal=m),p===`experience`&&(l.experience=m),p===`area`){let e=m,t=l.protectedAreas;l.protectedAreas=t.includes(e)?t.filter(t=>t!==e):[...t,e]}N();return}if(ee){i=ee,c=null,N();return}if(_){c=_,N();return}if(y){O(y);return}if(h){if(h===`library-group`&&m){g=m,N();return}if(h===`tour-next`||h===`tour-skip`){a=h===`tour-next`&&a!==null&&a+1<Qr.length?a+1:null,N();return}if(!n.session&&(h===`week-prev`||h===`week-next`||h===`week-today`)){se(h===`week-today`?0:s+(h===`week-next`?1:-1));return}if(h===`save-note`&&j){ae(j);return}if(n.session){re.handleAction(h,ie);return}if(r===`fuel`){te.handleAction(h,A,ie);return}if(!(ne.handleAction(h,m)||C.handleAction(h)||w.handleAction(h)||T.handleAction(h))){if(h===`save-profile`){let e=n.profile===null;n.profile={...l},e?(Y(n),O(`equipment`)):(O(`today`),E(`Profile saved — your workouts are updated.`))}else if(h===`save-equipment`){n.equipmentIds=[...t.querySelectorAll(`input[data-equipment]`)].filter(e=>e.checked).map(e=>e.dataset.equipment??``);let e=!n.equipmentConfirmed;n.equipmentConfirmed=!0,e&&(a=0),O(`today`),E(`Equipment saved.`)}else if(h===`avoid`&&j)L(j,!0),N(),E(`${o[j]?.name??`That exercise`} won't be planned again. Bring it back any time in Profile.`);else if(h===`unavoid`&&j)L(j,!1),N(),E(`${o[j]?.name??`That exercise`} is back in your workouts.`);else if(h===`start-tour`)a=0,oe(),O(`today`);else if(h===`go-equipment`)O(`equipment`);else if(h===`add-to-calendar`){let e=yr(S);e&&(b=e,N(),D(`Calendar file downloaded. Open it to add your workouts.`))}else if(h===`easy-week-start`)n.deload=Ze(n.deload,new Date),Y(n),N(),D(`Easy week is on. Every workout this week has one fewer set.`);else if(h===`easy-week-dismiss`)n.deload=$e(n.deload,new Date),Y(n),N();else if(h===`easy-week-end`)n.deload=Qe(n.deload,new Date),Y(n),N(),D(`Back to your normal sets.`);else if(h===`set-weight-unit`){let e=Ct.find(e=>e===m);if(!e)return;n.weightUnit=e,Y(n),N(),D(`Weights are now in ${Ot(e)}.`)}else if(h===`open-guide`)r!==`guide`&&(v=r),O(`guide`);else if(h===`close-guide`)r=v,N(),Br(t),window.scrollTo(0,0);else if(h===`start-setup`)O(`profile`);else if(h===`play-music`&&F)x.play(F);else if(h===`stop-music`)x.stop();else if(h===`do-today`&&F)i=e(new Date),c=F,N(),window.scrollTo(0,0);else if(h===`start-workout`){let{selected:e,shown:t}=z();if(!t)return;let r=ne.today(),i=Je(n.deload,new Date)?`easy`:r?In(r):null;re.begin(ye(t,be(e.weekdayIndex,t)),i)}else if(h===`finish-workout`){let{shown:e}=z();if(!e)return;we(e),O(`today`),E(`Nice work! It's marked done on your calendar.`)}}}}),T.check(),re.resume(),N()}var wa=document.querySelector(`#app`);wa&&Ca(wa),`serviceWorker`in navigator&&navigator.serviceWorker.register(`./sw.js`).catch(()=>{});
+    `}function B(){let e=r===`guide`?v:r,t=t=>e===t||t===`profile`&&e===`equipment`,n=(e,n)=>`<button type="button" class="nav-item${t(e)?` active`:``}"${t(e)?` aria-current="page"`:``} data-nav="${e}">${Xr[e]??``}<span>${n}</span></button>`;return`<nav class="bottom-nav" aria-label="Main">${n(`today`,`Workout`)}${n(`library`,`Exercises`)}${n(`progress`,`Progress`)}${n(`fuel`,`Fuel`)}${n(`profile`,`Profile`)}</nav>`}t.addEventListener(`change`,e=>{let t=e.target;if(t.dataset.field===`restore-file`){let e=t.files?.[0];e&&C.handleFileChosen(e);return}t.dataset.field===`cal-time`&&ke(t.value)?(n.calendar={...n.calendar,time:t.value},Y(n)):t.dataset.field===`cal-minutes`&&De.includes(Number(t.value))&&(n.calendar={...n.calendar,minutes:Number(t.value)},Y(n))});let je=null;t.addEventListener(`input`,e=>{let r=e.target;if(r.dataset.field!==`library-search`)return;h=r.value;let i=t.querySelector(`.library-list`);i&&(i.innerHTML=dr(h,g,n.equipmentIds,n.profile?.protectedAreas??[]))}),t.addEventListener(`touchstart`,e=>{let t=e.touches[0];je=e.target.closest(`.calendar, .week-nav`)&&t?{x:t.clientX,y:t.clientY}:null}),t.addEventListener(`touchend`,e=>{let t=e.changedTouches[0],r=je;if(je=null,!r||!t||n.session)return;let i=t.clientX-r.x,a=t.clientY-r.y;Math.abs(i)>=50&&Math.abs(i)>1.5*Math.abs(a)&&se(s+(i<0?1:-1))}),t.addEventListener(`click`,u=>{let d=u.target.closest(`[data-point]`);if(d){let e=d.closest(`.progress-card`)?.querySelector(`.chart-caption`);e&&(e.textContent=d.dataset.point??``);return}let f=u.target.closest(`button`);if(!f)return;let{group:p,value:m,action:h,day:_,date:ee,nav:y,step:k,delta:A,exercise:j,index:ie,planDay:M,planWorkout:P,workout:F,focusDay:ce,focus:le}=f.dataset;if(k&&A){let e=t.querySelector(`input[data-field="${k}"]`);e&&(e.value=String(Math.max(0,(Number(e.value)||0)+Number(A))));return}if(M!==void 0&&P){let e=Number(M),t=P===`rest`?null:P,n=l.weekPlan.map((n,r)=>r===e?t:n);if(!n.some(Boolean)){D(`Keep at least one workout day.`);return}l.weekPlan=n,l.focusPlan=l.focusPlan.map((t,n)=>n===e?null:t),N();return}if(ce!==void 0&&le){let e=Number(ce),t=le===`balanced`?null:le;l.focusPlan=l.focusPlan.map((n,r)=>r===e?t:n),N();return}if(p&&m){if(p===`goal`&&(l.goal=m),p===`experience`&&(l.experience=m),p===`area`){let e=m,t=l.protectedAreas;l.protectedAreas=t.includes(e)?t.filter(t=>t!==e):[...t,e]}N();return}if(ee){i=ee,c=null,N();return}if(_){c=_,N();return}if(y){O(y);return}if(h){if(h===`library-group`&&m){g=m,N();return}if(h===`tour-next`||h===`tour-skip`){a=h===`tour-next`&&a!==null&&a+1<Zr.length?a+1:null,N();return}if(!n.session&&(h===`week-prev`||h===`week-next`||h===`week-today`)){se(h===`week-today`?0:s+(h===`week-next`?1:-1));return}if(h===`save-note`&&j){ae(j);return}if(n.session){re.handleAction(h,ie);return}if(r===`fuel`){te.handleAction(h,A,ie);return}if(!(ne.handleAction(h,m)||C.handleAction(h)||w.handleAction(h)||T.handleAction(h))){if(h===`save-profile`){let e=n.profile===null;n.profile={...l},e?(Y(n),O(`equipment`)):(O(`today`),E(`Profile saved — your workouts are updated.`))}else if(h===`save-equipment`){n.equipmentIds=[...t.querySelectorAll(`input[data-equipment]`)].filter(e=>e.checked).map(e=>e.dataset.equipment??``);let e=!n.equipmentConfirmed;n.equipmentConfirmed=!0,e&&(a=0),O(`today`),E(`Equipment saved.`)}else if(h===`avoid`&&j)L(j,!0),N(),E(`${o[j]?.name??`That exercise`} won't be planned again. Bring it back any time in Profile.`);else if(h===`unavoid`&&j)L(j,!1),N(),E(`${o[j]?.name??`That exercise`} is back in your workouts.`);else if(h===`start-tour`)a=0,oe(),O(`today`);else if(h===`go-equipment`)O(`equipment`);else if(h===`add-to-calendar`){let e=vr(S);e&&(b=e,N(),D(`Calendar file downloaded. Open it to add your workouts.`))}else if(h===`easy-week-start`)n.deload=Ze(n.deload,new Date),Y(n),N(),D(`Easy week is on. Every workout this week has one fewer set.`);else if(h===`easy-week-dismiss`)n.deload=$e(n.deload,new Date),Y(n),N();else if(h===`easy-week-end`)n.deload=Qe(n.deload,new Date),Y(n),N(),D(`Back to your normal sets.`);else if(h===`set-weight-unit`){let e=Ct.find(e=>e===m);if(!e)return;n.weightUnit=e,Y(n),N(),D(`Weights are now in ${Ot(e)}.`)}else if(h===`open-guide`)r!==`guide`&&(v=r),O(`guide`);else if(h===`close-guide`)r=v,N(),zr(t),window.scrollTo(0,0);else if(h===`start-setup`)O(`profile`);else if(h===`play-music`&&F)x.play(F);else if(h===`stop-music`)x.stop();else if(h===`do-today`&&F)i=e(new Date),c=F,N(),window.scrollTo(0,0);else if(h===`start-workout`){let{selected:e,shown:t}=z();if(!t)return;let r=ne.today(),i=Je(n.deload,new Date)?`easy`:r?In(r):null;re.begin(ye(t,be(e.weekdayIndex,t)),i)}else if(h===`finish-workout`){let{shown:e}=z();if(!e)return;we(e),O(`today`),E(`Nice work! It's marked done on your calendar.`)}}}}),T.check(),re.resume(),N()}var Ca=document.querySelector(`#app`);Ca&&Sa(Ca),`serviceWorker`in navigator&&navigator.serviceWorker.register(`./sw.js`).catch(()=>{});
