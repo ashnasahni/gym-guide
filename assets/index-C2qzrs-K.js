@@ -482,11 +482,11 @@
     <header class="screen-header">
       <p class="eyebrow">New to working out?</p>
       <h1>Start here</h1>
-      <p class="lead">No experience needed. This takes two minutes, and you can come back to it any time.</p>
+      <p class="lead">No experience needed. Tap a topic to read it. This takes two minutes, and you can come back any time.</p>
     </header>
 
-    <section class="card guide-card">
-      <h2>The words</h2>
+    <details class="card switcher guide-card" open>
+      <summary>The words</summary>
       <dl class="guide-words">
         <dt>Rep</dt>
         <dd>One time doing a move, like pushing the handles forward once.</dd>
@@ -497,10 +497,10 @@
         <dt>Weight</dt>
         <dd>How heavy it is. On a machine, you set it with a pin in the weight stack.</dd>
       </dl>
-    </section>
+    </details>
 
-    <section class="card guide-card">
-      <h2>How much weight?</h2>
+    <details class="card switcher guide-card">
+      <summary>How much weight?</summary>
       <p>Start lighter than you think. Pick a weight where the last 2 reps feel hard but your form stays clean.</p>
       <ul>
         <li>If you could have done 5 or more extra reps, go heavier next time.</li>
@@ -508,10 +508,10 @@
         <li>The app remembers what you did and suggests the next weight, so you don't have to work it out.</li>
       </ul>
       ${ra(ta)}
-    </section>
+    </details>
 
-    <section class="card guide-card">
-      <h2>Using a machine</h2>
+    <details class="card switcher guide-card">
+      <summary>Using a machine</summary>
       <ul>
         <li>Look at the picture on the machine. It shows the move and which muscles it works.</li>
         <li>Adjust the seat and pads first so the handles line up with your body, then pick a light weight.</li>
@@ -519,36 +519,36 @@
         <li>Not sure how a machine works? Tap the exercise in the app for steps and a demo, or ask the staff at the front desk.</li>
       </ul>
       ${ra(na)}
-    </section>
+    </details>
 
-    <section class="card guide-card">
-      <h2>At the gym</h2>
+    <details class="card switcher guide-card">
+      <summary>At the gym</summary>
       <ul>
         <li>Do the warm-up first, then the exercises in order, then the cool-down.</li>
         <li>If a machine is taken, tap <strong>Swap</strong> for another option, or do the next exercise and come back.</li>
         <li>Wipe the machine when you finish, and put weights back where you found them.</li>
         <li>Everyone started at the beginning. Most people at the gym are focused on their own workout.</li>
       </ul>
-    </section>
+    </details>
 
-    <section class="card guide-card">
-      <h2>Sore or hurt?</h2>
+    <details class="card switcher guide-card">
+      <summary>Sore or hurt?</summary>
       <p>A dull, tired ache in your muscles for a day or two is normal. Sharp pain, pain in a joint, or pain that keeps coming back is not.</p>
       <ul>
         <li>If something hurts, stop, and tap <strong>This hurt</strong> so the app swaps in a gentler move.</li>
         <li>If it keeps happening, check with a doctor or physical therapist. This app isn't medical advice.</li>
       </ul>
-    </section>
+    </details>
 
-    <section class="card guide-card">
-      <h2>How this app helps</h2>
+    <details class="card switcher guide-card">
+      <summary>How this app helps</summary>
       <ul>
         <li>It plans each workout day using only the machines your gym has.</li>
         <li>Every exercise has steps, common mistakes and a demo video.</li>
         <li>Workout mode talks you through each set and runs the rest timer.</li>
         <li>It saves what you lift, so you can see your progress.</li>
       </ul>
-    </section>
+    </details>
 
     <button type="button" class="primary big" data-action="close-guide">${e}</button>
   `}var aa=[{title:`Tell us about you`,detail:`Your goal, and any injuries or sore spots to protect.`},{title:`Pick your gym's equipment`,detail:`You only get exercises that use machines your gym has.`},{title:`Follow today's workout`,detail:`Step-by-step form, a rest timer, and a voice that talks you through each set.`}];function oa(e){return`
