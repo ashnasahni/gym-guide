@@ -196,7 +196,7 @@
 
     ${Vr(a.bodyWeights??[],i,a.bodyWeightOpen??!1)}
 
-    <h2 class="section-title">Exercises</h2>
+    <h2 class="section-title">Progress by exercise</h2>
     ${Lr(e,t,i)}
 
     ${Rr(e,i)}
