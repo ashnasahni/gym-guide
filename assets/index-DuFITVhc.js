@@ -166,7 +166,7 @@
         <span>Body weight</span>
         ${r?`<span class="hint">Latest: ${m(r.pounds,t)}</span>`:``}
       </summary>
-      <p class="hint">Optional. Log your weight now and then. It stays on this phone and is never part of Share my week.</p>
+      <p class="hint">Optional. Stays on this phone.</p>
       <div class="calendar-fields">
         <label class="calendar-field">
           <span>Today's weight (${t})</span>
@@ -855,9 +855,9 @@
         ${De(`📅`,`purple`,`Your week`)}
         <p class="hint">Choose how many days a week, or pick each day yourself. Push is chest, shoulders and triceps. Pull is back and biceps. Legs days include abs. Home is a short abs routine you can do anywhere.</p>
         ${Yi(u.weekPlan,u.focusPlan,h,_)}
-      </section>`}function xe(e){return`
+      </section>`}function xe(e,t){return`
       <details class="card switcher setup-options"${S?` open`:``}>
-        <summary>Optional: weight units and workout days</summary>
+        <summary>${t?`Optional: weight units and workout days`:`Weight units and workout days`}</summary>
         <div class="more-body">${e}</div>
       </details>`}function Se(){let e=t.bodyWeights[t.bodyWeights.length-1];return Be(e?.pounds??null,t.heightCm,t.weightUnit)}function Ce(){let e=Ue(C,t.weightUnit);if(e)return C={...C,error:e},P(),!1;let n=Se();if(C.weight.trim()!==``&&C.weight.trim()!==n.weight){let e=f(Number(C.weight.trim()),t.weightUnit);t.bodyWeights=g(t.bodyWeights,B(new Date),e)}return t.heightCm=He(C,t.weightUnit),!0}function we(){let e=t.profile===null,n=be();return`
       <header class="screen-header">
@@ -886,8 +886,6 @@
         </div>
       </section>
 
-      ${e?``:n}
-
       <section class="card">
         ${De(`🛡️`,`green`,`Areas to protect`)}
         <p class="hint">Tick anything that's injured, painful, or tight. Risky exercises for these areas are left out, and gentler ones are picked instead.</p>
@@ -897,7 +895,7 @@
         <p class="disclaimer">This app isn't medical advice. If something hurts beyond normal muscle tiredness, stop, and check with a doctor or physical therapist about what's safe for you.</p>
       </section>
 
-      ${e?xe(n):``}
+      ${xe(n,e)}
 
       ${je()}
 
